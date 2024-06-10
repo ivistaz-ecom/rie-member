@@ -196,12 +196,13 @@ function Index() {
         const data = await response.json();
         //console.log(data);
         sessionStorage.setItem("r_TokenMember_SlpPref", JSON.stringify(data));
-        // If successful, navigate to dashboard
-        if (memberCount === 2) {
-          navigate("/payment-gateway");
-        } else {
-          navigate("/slp-info");
-        }
+        //If successful, navigate to dashboard
+        navigate("/payment-gateway");
+        // if (memberCount === 2) {
+
+        // } else {
+        //   navigate("/slp-info");
+        // }
 
         //navigate('/payment-gateway')
         // navigate(memberSpouse ? "/slp-info" : "/payment-gateway");

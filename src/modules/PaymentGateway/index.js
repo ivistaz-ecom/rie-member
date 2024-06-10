@@ -39,24 +39,33 @@ const PaymentGateway = () => {
   const isExpired = parseMemberInfo[0].exprdt < formattedDate ? true : false;
   const [isVoucherClaimed, setIsVoucherClaimed] = useState(false);
 
-  const memberFee = parseMemberData.memberFee;
-  const slpFee = parseMemberData.slpFee ? parseMemberData.slpFee : 0;
+  const phone = memberDataInfo
+    ? parseMemberDataInfo.riemembers.mobile
+    : parseMemberSLPData.slp.mobile;
+  const company = memberDataInfo
+    ? parseMemberDataInfo.riemembers.company
+    : parseMemberSLPData.slp.company;
+  const address = memberDataInfo
+    ? parseMemberDataInfo.riemembers.addr1
+    : parseMemberSLPData.slp.addr1;
+
+  const memberFee = parseInt(parseMemberData.memberFee);
+  const slpFee = parseMemberData.slpFee ? parseInt(parseMemberData.slpFee) : 0;
   const totalAmount = memberFee + slpFee;
-  const payableGST = parseMemberData.gst;
+  const payableGST = parseInt(parseMemberData.gst);
   const includingGST = (totalAmount * payableGST) / 100;
   const chargeableAmount = totalAmount + includingGST;
 
   const fullName =
     parseMemberInfo[0].firstname + " " + parseMemberInfo[0].lastname;
-  const phone = parseMemberDataInfo.riemembers.mobile;
+
   const email = parseMemberInfo[0].email;
 
-  const address = parseMemberDataInfo.riemembers.addr1;
   const currency = parseMemberInfo[0].region === "SA" ? "INR" : "USD";
   const firstName = parseMemberInfo[0].firstname;
   const lastName = parseMemberInfo[0].lastname;
   const region = parseMemberInfo[0].region;
-  const company = parseMemberDataInfo.riemembers.company;
+
   const symbol = parseMemberInfo[0].region === "SA" ? "₹" : "$";
   const voucher = parseMemberInfo[0].voucher_amt;
   const expdate = parseMemberInfo[0].exprdt;
