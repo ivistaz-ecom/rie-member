@@ -195,8 +195,8 @@ function RazorPay({
     key: SERVERCONFIG.RAZORPAY_KEYID,
     amount: amount * 100,
     currency: currency,
-    name: "RIE 2025",
-    description: "RIE 2025 Event Ticket",
+    name: "RIE 2025 EVENT",
+    description: "RIE 2025 Event Ticket -Bangalore",
     image: "https://cdn.razorpay.com/logos/7K3b6d18wHwKzL_medium.png",
     handler: function (response) {
       if (response && response.razorpay_payment_id) {
