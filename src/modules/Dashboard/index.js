@@ -218,9 +218,9 @@ const Dashboard = () => {
                 We are so excited!
               </h5>
               <p>
-                A regional event that provides an opportunity for SAsian
-                entrepreneurs to meet and connect, peer to peer learning. All
-                this around intense learning and phenomenal parties.
+                Thank you once again for your enthusiasm and commitment. We look
+                forward to welcoming you to RIE 2025 and embarking on this
+                incredible journey together.
               </p>
               <Button className="w-full">Explore More</Button>
             </>
