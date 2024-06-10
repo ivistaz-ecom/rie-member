@@ -46,7 +46,9 @@ function Index() {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
 
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState(
+    parseSlpSavedInfo ? parseSlpSavedInfo.slp.gender : "",
+  );
 
   const [firstName, setFirstName] = useState(
     parseSlpSavedInfo ? parseSlpSavedInfo.slp.firstname : "",
@@ -171,21 +173,25 @@ function Index() {
     if (!copyAddress) {
       // If toggle switch is turned on, copy communication address to billing address
       setSearchCountry({
-        country: memberSavedInfo ? parseMemSavedInfo.riemembers.country : "",
+        country: memberSavedInfo ? parseMemSavedInfo.riemembers.comcountry : "",
       });
       setSearchCity({
-        city: memberSavedInfo ? parseMemSavedInfo.riemembers.city : "",
+        city: memberSavedInfo ? parseMemSavedInfo.riemembers.comcity : "",
       });
       setSearchState({
-        state: memberSavedInfo ? parseMemSavedInfo.riemembers.state : "",
+        state: memberSavedInfo ? parseMemSavedInfo.riemembers.comstate : "",
       });
       setCommunicationAddress({
-        addressLine1: memberSavedInfo ? parseMemSavedInfo.riemembers.addr1 : "",
-        addressLine2: memberSavedInfo ? parseMemSavedInfo.riemembers.addr2 : "",
+        addressLine1: memberSavedInfo
+          ? parseMemSavedInfo.riemembers.comaddr1
+          : "",
+        addressLine2: memberSavedInfo
+          ? parseMemSavedInfo.riemembers.comaddr2
+          : "",
         country: "",
-        state: memberSavedInfo ? parseMemSavedInfo.riemembers.state : "",
-        city: memberSavedInfo ? parseMemSavedInfo.riemembers.city : "",
-        postalCode: memberSavedInfo ? parseMemSavedInfo.riemembers.pin : "",
+        state: memberSavedInfo ? parseMemSavedInfo.riemembers.comstate : "",
+        city: memberSavedInfo ? parseMemSavedInfo.riemembers.comcity : "",
+        postalCode: memberSavedInfo ? parseMemSavedInfo.riemembers.compin : "",
       });
     } else {
       // If toggle switch is turned off, clear billing address fields
@@ -458,7 +464,7 @@ function Index() {
           SLP Information
         </h2>
         <div className="flex flex-col gap-4">
-          <div className="grid  grid-cols-2 gap-1 ">
+          <div className="grid  grid-cols-2 gap-2 ">
             <TextInput
               id="small"
               type="text"
@@ -502,8 +508,8 @@ function Index() {
               onChange={(e) => setGender(e.target.value)}
             >
               <option>Gender</option>
-              <option value="m">Male</option>
-              <option value="f">Female</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
             </Select>
             {genderError && (
               <p className="p-2 text-start text-red-500">{genderError}</p>
@@ -528,12 +534,12 @@ function Index() {
               <p className="p-2 text-start text-red-500">{emailError}</p>
             )}
           </div>
-          <div className="relative flex">
+          <div className="relative flex gap-2">
             <TextInput
               id="small"
               type="text"
               sizing="lg"
-              placeholder="Code"
+              placeholder="Search Country"
               value={searchCode.search}
               onChange={(e) =>
                 setSearchCode({ search: e.target.value, showCodes: true })

@@ -535,12 +535,13 @@ function Index() {
               <p className="p-2 text-start text-red-500">{genderError}</p>
             )}
           </div>
-          <div className="relative flex">
+          <div className="relative flex gap-2">
             <TextInput
               id="small"
               type="text"
               sizing="lg"
               placeholder="Code"
+              className="w-1/2"
               value={searchCode.search}
               onChange={(e) =>
                 setSearchCode({ search: e.target.value, showCodes: true })
@@ -577,14 +578,17 @@ function Index() {
               onChange={handlePhoneNumberChange}
               //onBlur={() => setPhoneNumberError("")}
               ref={phoneNumberRef}
-              className="w-full rounded"
+              className="-0 w-full rounded"
             />
             {phoneNumberError && (
               <p className="p-2 text-start text-red-500">{phoneNumberError}</p>
             )}
           </div>
         </div>
-        <h2 className="py-4 text-start text-white">Business Details</h2>
+
+        <h2 className="py-4 text-start text-xl font-semibold text-white">
+          Business Details
+        </h2>
         <div className="flex flex-col gap-4">
           <div>
             <TextInput
@@ -656,7 +660,7 @@ function Index() {
           )}
         </div>
         <h2 className="py-4 text-start text-xl font-semibold text-white">
-          Communication Address
+          Billing Address
         </h2>
         <div className="flex flex-col gap-4">
           <div>
@@ -829,9 +833,9 @@ function Index() {
           </div>
         </div>
         <h2 className="py-4 text-start text-xl font-semibold text-white">
-          Billing Address
+          Communication Address
         </h2>
-        <div className="flex max-w-md flex-col gap-4 py-4">
+        <div className="-pt-4 flex max-w-md flex-col gap-4 pb-6">
           <label className="inline-flex cursor-pointer items-center">
             <input
               type="checkbox"

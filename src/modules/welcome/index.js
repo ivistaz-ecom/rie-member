@@ -10,7 +10,7 @@ function Index() {
   const parseMemberInfo = JSON.parse(memberInfo);
   const gst = 18;
   const memberFee = parseMemberInfo[0].region === "SA" ? 49000 : 2500;
-  const slpFee = parseMemberInfo[0].region === "SA" ? 4900 : 1500;
+  const slpFee = parseMemberInfo[0].region === "SA" ? 49000 : 1500;
   const totalFee = memberFee + slpFee;
   const memberPayable = (memberFee * 18) / 100;
   const memberSlpPayable = ((memberFee + slpFee) * 18) / 100;

@@ -33,9 +33,9 @@ function Index() {
   const [memberPref, setMemberPref] = useState({
     loading: false,
     flyingfrom: memberPrefInfo ? prefMember.flyingfrom : "",
-    dietpref: "",
+    dietpref: memberPrefInfo ? prefMember.dietpref : "",
     allergies: memberPrefInfo ? prefMember.allergies : "",
-    shirtsize: "",
+    shirtsize: memberPrefInfo ? prefMember.shirtsize : "",
     interests: [],
     specialrequest: memberPrefInfo ? prefMember.specialrequest : "",
   });
@@ -298,16 +298,6 @@ function Index() {
                 }
               >
                 Non-Veg
-              </option>
-              <option
-                value="Gluten-free"
-                selected={
-                  memberPrefInfo && prefMember.dietpref === "Gluten-free"
-                    ? true
-                    : false
-                }
-              >
-                Gluten-free
               </option>
               <option
                 value="Jain"

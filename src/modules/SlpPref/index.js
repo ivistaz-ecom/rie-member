@@ -26,21 +26,25 @@ function Index() {
   const parseMemPref = JSON.parse(memberPrefInfo);
   const prefMember = memberPrefInfo ? parseMemPref.memberpref : "";
 
+  const slpPrefInfo = sessionStorage.getItem("r_TokenMember_SlpPref");
+  const parseSlpPref = JSON.parse(slpPrefInfo);
+  const prefSlp = slpPrefInfo ? parseSlpPref.slppref : "";
+
   const memberTotal = sessionStorage.getItem("memberInfo");
   const parseMemberTotal = JSON.parse(memberTotal);
   const memberCount = parseMemberTotal.memberCount;
 
   const [memberPref, setMemberPref] = useState({
     loading: false,
-    flyingfrom: memberPrefInfo ? prefMember.flyingfrom : "",
-    dietpref: "",
-    allergies: memberPrefInfo ? prefMember.allergies : "",
-    shirtsize: "",
+    flyingfrom: slpPrefInfo ? prefSlp.flyingfrom : "",
+    dietpref: slpPrefInfo ? prefSlp.dietpref : "",
+    allergies: slpPrefInfo ? prefSlp.allergies : "",
+    shirtsize: slpPrefInfo ? prefSlp.shirtsize : "",
     interests: [],
-    specialrequest: memberPrefInfo ? prefMember.specialrequest : "",
+    specialrequest: slpPrefInfo ? prefSlp.specialrequest : "",
   });
   useEffect(() => {
-    setSelectedInterest(memberPrefInfo ? prefMember.interests : "");
+    setSelectedInterest(slpPrefInfo ? prefSlp.interests : "");
   }, []);
   const [errors, setErrors] = useState({
     flyingfrom: "",
@@ -285,7 +289,7 @@ function Index() {
               <option
                 value="Veg"
                 selected={
-                  memberPrefInfo && prefMember.dietpref === "Veg" ? true : false
+                  slpPrefInfo && prefSlp.dietpref === "Veg" ? true : false
                 }
               >
                 Veg
@@ -293,29 +297,16 @@ function Index() {
               <option
                 value="Non-Veg"
                 selected={
-                  memberPrefInfo && prefMember.dietpref === "Non-Veg"
-                    ? true
-                    : false
+                  slpPrefInfo && prefSlp.dietpref === "Non-Veg" ? true : false
                 }
               >
                 Non-Veg
               </option>
-              <option
-                value="Gluten-free"
-                selected={
-                  memberPrefInfo && prefMember.dietpref === "Gluten-free"
-                    ? true
-                    : false
-                }
-              >
-                Gluten-free
-              </option>
+
               <option
                 value="Jain"
                 selected={
-                  memberPrefInfo && prefMember.dietpref === "Jain"
-                    ? true
-                    : false
+                  slpPrefInfo && prefSlp.dietpref === "Jain" ? true : false
                 }
               >
                 Jain
@@ -323,9 +314,7 @@ function Index() {
               <option
                 value="Vegan"
                 selected={
-                  memberPrefInfo && prefMember.dietpref === "Vegan"
-                    ? true
-                    : false
+                  slpPrefInfo && prefSlp.dietpref === "Vegan" ? true : false
                 }
               >
                 Vegan
@@ -379,7 +368,7 @@ function Index() {
               <option
                 value="XS"
                 selected={
-                  memberPrefInfo && prefMember.shirtsize === "XS" ? true : false
+                  slpPrefInfo && prefSlp.shirtsize === "XS" ? true : false
                 }
               >
                 XS
@@ -387,7 +376,7 @@ function Index() {
               <option
                 value="S"
                 selected={
-                  memberPrefInfo && prefMember.shirtsize === "S" ? true : false
+                  slpPrefInfo && prefSlp.shirtsize === "S" ? true : false
                 }
               >
                 S
@@ -395,7 +384,7 @@ function Index() {
               <option
                 value="M"
                 selected={
-                  memberPrefInfo && prefMember.shirtsize === "M" ? true : false
+                  slpPrefInfo && prefSlp.shirtsize === "M" ? true : false
                 }
               >
                 M
@@ -403,7 +392,7 @@ function Index() {
               <option
                 value="L"
                 selected={
-                  memberPrefInfo && prefMember.shirtsize === "L" ? true : false
+                  slpPrefInfo && prefSlp.shirtsize === "L" ? true : false
                 }
               >
                 L
@@ -411,7 +400,7 @@ function Index() {
               <option
                 value="XL"
                 selected={
-                  memberPrefInfo && prefMember.shirtsize === "XL" ? true : false
+                  slpPrefInfo && prefSlp.shirtsize === "XL" ? true : false
                 }
               >
                 XL
@@ -419,9 +408,7 @@ function Index() {
               <option
                 value="XXL"
                 selected={
-                  memberPrefInfo && prefMember.shirtsize === "XXL"
-                    ? true
-                    : false
+                  slpPrefInfo && prefSlp.shirtsize === "XXL" ? true : false
                 }
               >
                 XXL

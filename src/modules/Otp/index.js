@@ -25,7 +25,7 @@ function Index() {
         type: "success",
         loading: false,
       });
-      //sessionStorage.removeItem("verification");
+      sessionStorage.removeItem("verification");
       if (isRegistered === "true") {
         navigate("/dashboard");
       } else {

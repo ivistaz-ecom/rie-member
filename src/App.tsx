@@ -8,6 +8,10 @@ import MemberPref from "./modules/MemeberPref";
 import PaymentGateway from "./modules/PaymentGateway";
 import SlpRegistration from "./modules/SlpRegistration";
 import SlpPref from "./modules/SlpPref";
+import Dashboard from "./modules/Dashboard";
+import PaymentSuccessful from "./modules/PaymentSuccessful";
+import TransactionDetails from "./modules/TransactionDetails";
+import Transactions from "./modules/TransactionDetails/transactions";
 
 function App() {
   return (
@@ -25,6 +29,12 @@ function App() {
       <Route path="/payment-gateway" element={<PaymentGateway />} />
       <Route path="/slp-info" element={<SlpRegistration />} />
       <Route path="/slp-preferences" element={<SlpPref />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      {/* <Route path="/refund-and-transfer" element={<RefundAndTransfer />} /> */}
+      <Route path="/payment-status" element={<PaymentSuccessful />} />
+      {/* <Route path="/thank-you" element={<ThankYou />} /> */}
+      <Route path="/transaction-details" element={<TransactionDetails />} />
+      <Route path="/transactions" element={<Transactions />} />
     </Routes>
   );
 }

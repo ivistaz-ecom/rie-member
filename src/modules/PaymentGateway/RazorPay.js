@@ -179,11 +179,13 @@ function RazorPay({
 
       console.log("Form submitted successfully:", data);
       sessionStorage.setItem("Form_submitted", JSON.stringify(data));
+
       updateSpouseStatus();
       //sessionStorage.removeItem('Form_error');
     } catch (error) {
       console.error("Error sending preferences:", error.message);
       sessionStorage.setItem("Form_error", JSON.stringify(formattedData));
+
       //sessionStorage.removeItem('Form_submitted');
       updateSpouseStatus();
     }
@@ -252,6 +254,7 @@ function RazorPay({
 
   useEffect(() => {
     if (state.paymentId) {
+      sessionStorage.setItem("r_Finalstatus", "success");
       handlePayment();
       sendEmail();
     }
