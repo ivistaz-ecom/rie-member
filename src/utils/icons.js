@@ -1,0 +1,21 @@
+import { IoIosArrowBack } from "react-icons/io";
+import { FaFlagUsa } from "react-icons/fa";
+import { CiHeart } from "react-icons/ci";
+import { CiCircleCheck } from "react-icons/ci";
+import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleUp } from "react-icons/fa6";
+import { RiRefund2Fill } from "react-icons/ri";
+import { RiQuestionMark } from "react-icons/ri";
+import { PiSignOutBold } from "react-icons/pi";
+import { IoCheckmarkDoneOutline } from "react-icons/io5";
+
+export const back = <IoIosArrowBack />;
+export const usa = <FaFlagUsa />;
+export const heart = <CiHeart />;
+export const check = <CiCircleCheck />;
+export const angleDown = <FaAngleDown />;
+export const angleUp = <FaAngleUp />;
+export const refund = <RiRefund2Fill />;
+export const question = <RiQuestionMark />;
+export const signOut = <PiSignOutBold />;
+export const transaction = <IoCheckmarkDoneOutline />;
