@@ -12,7 +12,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import SERVERCONFIG from "../../server.json";
-//import { AppContext } from "../../context/AppContext";
 import Loader from "../../components/Loader";
 
 const Dashboard = () => {
@@ -136,18 +135,31 @@ const Dashboard = () => {
   const addSlp = () => {
     sessionStorage.setItem("r_MemberCount", 1);
     sessionStorage.setItem("r_SlpOnly", true);
-    sessionStorage.removeItem("r_voucher");
-    sessionStorage.removeItem("r_voucherStatus");
-    sessionStorage.removeItem("r_currPayable");
-    sessionStorage.removeItem("r_currEBird");
-    sessionStorage.removeItem("claimed_voucher");
-    sessionStorage.removeItem("r_voucherStatus");
-    sessionStorage.removeItem("r_currMember");
-    sessionStorage.removeItem("runningPackages");
-    sessionStorage.removeItem("r_TokenMember_Pref");
-    sessionStorage.removeItem("r_TokenMember_Info");
-    sessionStorage.removeItem("r_TokenMember_Slp");
-    sessionStorage.removeItem("r_TokenMember_SlpPref");
+    const memberInfo = sessionStorage.getItem("r_TokenMember_Session");
+    const parseMemberInfo = JSON.parse(memberInfo);
+    // const gst = 18;
+    // const memberFee = parseMemberInfo[0].region === "SA" ? 49000 : 2500;
+    const slpFee =
+      parseMemberInfo[0].region === "SA"
+        ? SERVERCONFIG.SLP_FEE
+        : SERVERCONFIG.SLP_FEE_USD;
+    const memberSlpPayable = (slpFee * 18) / 100;
+    const newMemberInfo = {
+      fee: slpFee,
+      gst: 18,
+      payableAmount: memberSlpPayable,
+      memberCount: 1,
+    };
+    sessionStorage.setItem(
+      "memberInfo",
+      JSON.stringify({
+        memberFee: newMemberInfo.fee,
+        memberCount: newMemberInfo.memberCount,
+        gst: newMemberInfo.gst,
+        payableAmount: newMemberInfo.payableAmount,
+      }),
+    );
+
     navigate("/slp-info");
   };
 

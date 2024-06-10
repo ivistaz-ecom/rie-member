@@ -14,7 +14,7 @@ function Index() {
   const totalFee = memberFee + slpFee;
   const memberPayable = (memberFee * 18) / 100;
   const memberSlpPayable = ((memberFee + slpFee) * 18) / 100;
-  console.log(memberPayable);
+  //console.log(memberPayable);
   const memberOnly = () => {
     const newMemberInfo = {
       fee: memberFee,

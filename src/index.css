@@ -27,7 +27,7 @@
     transform: translateX(0);
   }
 }
-input::placeholder {
+.code input::placeholder {
  font-size: 13px;
 }
 

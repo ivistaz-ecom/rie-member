@@ -114,8 +114,8 @@ function Index() {
     if (res.packages.length > 0) {
       const memberInfo = sessionStorage.getItem("memberInfo");
       const parseMemberInfo = JSON.parse(memberInfo);
-      const payableAMount = parseMemberInfo.memberFee;
-      const payableGst = parseMemberInfo.gst;
+      const payableAMount = memberInfo ? parseMemberInfo.memberFee : "0";
+      const payableGst = memberInfo ? parseMemberInfo.gst : "0";
       sessionStorage.setItem("runningPackages", JSON.stringify(res.packages));
       console.log("here iam storing the package in session");
       const discountValid = res.packages[0].discountpercent;

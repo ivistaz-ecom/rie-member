@@ -26,6 +26,7 @@ function Index() {
   const parseSlpSavedInfo = JSON.parse(slpSavedInfo);
   const slpContact = sessionStorage.getItem("r_TokenSLP_Contact");
   const parseSlpContact = JSON.parse(slpContact);
+  const slpCount = sessionStorage.getItem("r_MemberCount");
 
   const [copyAddress, setCopyAddress] = useState(false);
   const [copyCompany, setCompany] = useState(false);
@@ -464,7 +465,7 @@ function Index() {
   return (
     <div className="flex flex-col items-center justify-center bg-[#210657]">
       <div className="w-full p-4 text-center lg:w-1/3">
-        <h2 className="text-1xl  pb-10 font-semibold text-white lg:text-2xl">
+        <h2 className="pb-10 text-xl font-semibold text-white lg:text-2xl">
           SLP Information
         </h2>
         <div className="flex flex-col gap-4">
@@ -490,7 +491,7 @@ function Index() {
               onChange={(e) => setLastName(e.target.value)}
             />
           </div>
-          <div className="grid  grid-cols-2 gap-1 ">
+          <div className="-pt-12  grid grid-cols-2 gap-1 p-0">
             <div className="w-full">
               {firstNameError && (
                 <p className="p-2 text-start text-red-500">{firstNameError}</p>
@@ -552,6 +553,7 @@ function Index() {
               sizing="lg"
               placeholder="Search Country"
               value={searchCode.search}
+              className="code"
               onChange={(e) =>
                 setSearchCode({ search: e.target.value, showCodes: true })
               }
@@ -597,22 +599,27 @@ function Index() {
             )}
           </div>
         </div>
-        <h2 className="py-4 text-start text-white">Communication Address</h2>
-        <div className="flex max-w-md flex-col gap-4 py-4">
-          <label class="inline-flex cursor-pointer items-center">
-            <input
-              type="checkbox"
-              value=""
-              class="peer sr-only"
-              checked={copyAddress}
-              onChange={handleToggleSwitch}
-            />
-            <div class="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
-            <span class="ms-3 text-sm font-medium text-white dark:text-gray-300">
-              Same as Member
-            </span>
-          </label>
-        </div>
+
+        <h2 className="py-4 text-start text-xl font-semibold text-white">
+          Communication Address
+        </h2>
+        {!slpCount === 1 && (
+          <div className="-pt-4 flex max-w-md flex-col gap-4 pb-6">
+            <label class="inline-flex cursor-pointer items-center">
+              <input
+                type="checkbox"
+                value=""
+                class="peer sr-only"
+                checked={copyAddress}
+                onChange={handleToggleSwitch}
+              />
+              <div class="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
+              <span class="ms-3 text-sm font-medium text-white dark:text-gray-300">
+                Same as Member
+              </span>
+            </label>
+          </div>
+        )}
         <div className="flex flex-col gap-4">
           <div>
             <TextInput
@@ -783,22 +790,27 @@ function Index() {
             )}
           </div>
         </div>
-        <h2 className="py-4 text-start text-white">Business Details</h2>
-        <div className="flex max-w-md flex-col gap-4 py-4">
-          <label class="inline-flex cursor-pointer items-center">
-            <input
-              type="checkbox"
-              value=""
-              class="peer sr-only"
-              checked={copyCompany}
-              onChange={handleToggleBusinessSwitch}
-            />
-            <div class="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
-            <span class="ms-3 text-sm font-medium text-white dark:text-gray-300">
-              Same as Member
-            </span>
-          </label>
-        </div>
+
+        <h2 className="py-4 text-start text-xl font-semibold text-white">
+          Business Details
+        </h2>
+        {!slpCount === 1 && (
+          <div className="-pt-4 flex max-w-md flex-col gap-4 pb-6">
+            <label class="inline-flex cursor-pointer items-center">
+              <input
+                type="checkbox"
+                value=""
+                class="peer sr-only"
+                checked={copyCompany}
+                onChange={handleToggleBusinessSwitch}
+              />
+              <div class="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800 rtl:peer-checked:after:-translate-x-full"></div>
+              <span class="ms-3 text-sm font-medium text-white dark:text-gray-300">
+                Same as Member
+              </span>
+            </label>
+          </div>
+        )}
         <div className="flex flex-col gap-4">
           <div>
             <TextInput
