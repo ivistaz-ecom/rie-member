@@ -38,7 +38,7 @@ function Index() {
     loading: false,
     flyingfrom: slpPrefInfo ? prefSlp.flyingfrom : "",
     dietpref: slpPrefInfo ? prefSlp.dietpref : "",
-    allergies: slpPrefInfo ? prefSlp.allergies : "None",
+    allergies: slpPrefInfo ? prefSlp.allergies : "",
     shirtsize: slpPrefInfo ? prefSlp.shirtsize : "",
     interests: [],
     specialrequest: slpPrefInfo ? prefSlp.specialrequest : "",
@@ -374,9 +374,19 @@ function Index() {
             >
               <option value="">Select Shirt Size</option>
               <option
+                value="2XS"
+                selected={
+                  memberPrefInfo && prefMember.shirtsize === "2XS"
+                    ? true
+                    : false
+                }
+              >
+                2XS
+              </option>
+              <option
                 value="XS"
                 selected={
-                  slpPrefInfo && prefSlp.shirtsize === "XS" ? true : false
+                  memberPrefInfo && prefMember.shirtsize === "XS" ? true : false
                 }
               >
                 XS
@@ -384,7 +394,7 @@ function Index() {
               <option
                 value="S"
                 selected={
-                  slpPrefInfo && prefSlp.shirtsize === "S" ? true : false
+                  memberPrefInfo && prefMember.shirtsize === "S" ? true : false
                 }
               >
                 S
@@ -392,15 +402,16 @@ function Index() {
               <option
                 value="M"
                 selected={
-                  slpPrefInfo && prefSlp.shirtsize === "M" ? true : false
+                  memberPrefInfo && prefMember.shirtsize === "M" ? true : false
                 }
               >
                 M
               </option>
+
               <option
                 value="L"
                 selected={
-                  slpPrefInfo && prefSlp.shirtsize === "L" ? true : false
+                  memberPrefInfo && prefMember.shirtsize === "L" ? true : false
                 }
               >
                 L
@@ -408,18 +419,50 @@ function Index() {
               <option
                 value="XL"
                 selected={
-                  slpPrefInfo && prefSlp.shirtsize === "XL" ? true : false
+                  memberPrefInfo && prefMember.shirtsize === "XL" ? true : false
                 }
               >
                 XL
               </option>
               <option
-                value="XXL"
+                value="2XL"
                 selected={
-                  slpPrefInfo && prefSlp.shirtsize === "XXL" ? true : false
+                  memberPrefInfo && prefMember.shirtsize === "2XL"
+                    ? true
+                    : false
                 }
               >
-                XXL
+                2XL
+              </option>
+              <option
+                value="3XL"
+                selected={
+                  memberPrefInfo && prefMember.shirtsize === "3XL"
+                    ? true
+                    : false
+                }
+              >
+                3XL
+              </option>
+              <option
+                value="4XL"
+                selected={
+                  memberPrefInfo && prefMember.shirtsize === "4XL"
+                    ? true
+                    : false
+                }
+              >
+                4XL
+              </option>
+              <option
+                value="5XL"
+                selected={
+                  memberPrefInfo && prefMember.shirtsize === "5XL"
+                    ? true
+                    : false
+                }
+              >
+                5XL
               </option>
             </Select>
             {errors.shirtsize && (

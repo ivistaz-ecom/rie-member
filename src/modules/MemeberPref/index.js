@@ -41,7 +41,7 @@ function Index() {
     loading: false,
     flyingfrom: memberPrefInfo ? prefMember.flyingfrom : "",
     dietpref: memberPrefInfo ? prefMember.dietpref : "",
-    allergies: memberPrefInfo ? prefMember.allergies : "None",
+    allergies: memberPrefInfo ? prefMember.allergies : "",
     shirtsize: memberPrefInfo ? prefMember.shirtsize : "",
     interests: [],
     specialrequest: memberPrefInfo ? prefMember.specialrequest : "",
@@ -393,7 +393,7 @@ function Index() {
                   memberPrefInfo && prefMember.shirtsize === "XS" ? true : false
                 }
               >
-                S
+                XS
               </option>
               <option
                 value="S"
@@ -401,7 +401,7 @@ function Index() {
                   memberPrefInfo && prefMember.shirtsize === "S" ? true : false
                 }
               >
-                M
+                S
               </option>
               <option
                 value="M"
