@@ -512,8 +512,15 @@ function Index() {
               onChange={(e) => setGender(e.target.value)}
             >
               <option>Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="male" selected={gender === "male" ? true : false}>
+                Male
+              </option>
+              <option
+                value="female"
+                selected={gender === "female" ? true : false}
+              >
+                Female
+              </option>
             </Select>
             {genderError && (
               <p className="p-2 text-start text-red-500">{genderError}</p>
