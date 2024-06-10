@@ -126,7 +126,7 @@ const PaymentGateway = () => {
           <div className="flex w-full items-center justify-between">
             <p className="text-gray-200">SLP Fee</p>
             <p className="text-gray-200">
-              >{symbol}
+              {symbol}
               {parseMemberData.slpFee}
             </p>
           </div>
