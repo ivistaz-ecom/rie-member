@@ -39,7 +39,7 @@ function Terms({ handleTermAccepted }) {
     setIsClicked(false);
     setModalClose(true);
     handleTermAccepted(true);
-    
+
     //sessionStorage.setItem("r_go", "false")
   };
 
@@ -140,6 +140,10 @@ function Terms({ handleTermAccepted }) {
                 7. Event Modification. The Undersigned understands that all
                 Event activities are subject to change, as EO deems necessary,
                 in its sole discretion.
+              </p>
+              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                8. Voucher for EO Bangalore members will be used by default by
+                agreeing to these terms and conditions.
               </p>
             </div>
 
