@@ -3,22 +3,29 @@ import { Card } from "flowbite-react";
 import { GoPerson } from "react-icons/go";
 import { GoPersonAdd } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import SERVERCONFIG from "../../server.json";
 
 function Index() {
   const navigate = useNavigate();
   const memberInfo = sessionStorage.getItem("r_TokenMember_Session");
   const parseMemberInfo = JSON.parse(memberInfo);
   const gst = 18;
-  const memberFee = parseMemberInfo[0].region === "SA" ? 49000 : 2500;
-  const slpFee = parseMemberInfo[0].region === "SA" ? 49000 : 1500;
-  const totalFee = memberFee + slpFee;
-  const memberPayable = (memberFee * 18) / 100;
-  const memberSlpPayable = ((memberFee + slpFee) * 18) / 100;
+  const memberFee =
+    parseMemberInfo[0].region === "SA"
+      ? SERVERCONFIG.MEMBER_FEE
+      : SERVERCONFIG.MEMBER_FEE_USD;
+  const slpFee =
+    parseMemberInfo[0].region === "SA"
+      ? SERVERCONFIG.SLP_FEE
+      : SERVERCONFIG.SLP_FEE_USD;
+  const totalFee = parseInt(memberFee) + parseInt(slpFee);
+  const memberPayable = (memberFee * SERVERCONFIG.GST) / 100;
+  const memberSlpPayable = (totalFee * SERVERCONFIG.GST) / 100;
   //console.log(memberPayable);
   const memberOnly = () => {
     const newMemberInfo = {
-      fee: memberFee,
-      gst: 18,
+      fee: parseInt(memberFee),
+      gst: SERVERCONFIG.GST,
       payableAmount: memberPayable,
       memberCount: 1,
     };
@@ -36,10 +43,10 @@ function Index() {
 
   const memberSlp = () => {
     const newMemberInfo = {
-      fee: memberFee,
-      slp: slpFee,
+      fee: parseInt(memberFee),
+      slp: parseInt(slpFee),
       memberCount: 2,
-      gst: 18,
+      gst: SERVERCONFIG.GST,
       payableAmount: memberSlpPayable,
     };
     sessionStorage.setItem(
