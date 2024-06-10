@@ -30,13 +30,13 @@ function RazorPay({
   const paymentId = sessionStorage.getItem("paymentId");
   const navigate = useNavigate();
 
-  const status = sessionStorage.getItem("r_go");
+  // const status = sessionStorage.getItem("r_go");
 
-  useEffect(() => {
-    if (status === "false") {
-      sessionStorage.setItem("r_go", "true");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (status === "false") {
+  //     sessionStorage.setItem("r_go", "true");
+  //   }
+  // }, []);
 
   // const { paymentButtonDisable, isClicked, paymentStatus, setPaymentStatus } =
   //   useContext(AppContext);
@@ -270,10 +270,17 @@ function RazorPay({
     }));
   };
 
+  const handleTermAccepted = (termStatus) => {
+    console.log(termStatus);
+    setIsClicked(termStatus);
+    //bgColor = termStatus === "clicked yes razor" ? "bg-blue-600" : "bg-blue-200";
+    //return bgColor;
+  };
+
   return (
     <>
       <div className="flex w-full flex-col items-center lg:w-[50%]">
-        {state.showModal && <Terms />}
+        {state.showModal && <Terms handleTermAccepted={handleTermAccepted} />}
         <div className="mb-6 flex w-11/12 items-center justify-between rounded-lg bg-white p-4 drop-shadow">
           <div className="flex items-center gap-3">
             <input
@@ -300,11 +307,10 @@ function RazorPay({
             Read the Terms and Conditions.
           </label>
         </div>
-        {console.log(status)}
         <button
-          className={`w-full rounded-3xl py-2 text-lg text-white  ${status === "false" ? "cursor-not-allowed bg-gray-400 hover:bg-gray-400" : "bg-[#653BC0] "}`}
+          className={`${isClicked ? "bg-[#653BC0]" : "cursor-not-allowed  bg-gray-400 hover:bg-gray-400"} w-full rounded-3xl py-2 text-lg text-white`}
           onClick={openPayModal}
-          disabled={status === "false"}
+          disabled={!isClicked}
         >
           {state.paymentRedirect ? (
             <>
@@ -331,7 +337,7 @@ function RazorPay({
             <>Proceed to Pay</>
           )}
         </button>
-        Amount:{amount}
+        {/* Amount:{amount}
         Fullname:{name}
         Phone:{phone}
         Email:{email}
@@ -346,7 +352,7 @@ function RazorPay({
         Expiry:{expdate}
         SpouseID:{spouseid}
         SpouseStatus:{spousestatus}
-        eoid:{eoid}
+        eoid:{eoid} */}
       </div>
     </>
   );

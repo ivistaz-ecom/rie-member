@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 // import { AppContext } from "../../context/AppContext";
 
-function Terms() {
+function Terms({ handleTermAccepted }) {
   const [modalClose, setModalClose] = useState(false);
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
   const textContainerRef = useRef(null);
@@ -36,14 +36,17 @@ function Terms() {
 
   const handleAccept = () => {
     console.log("clicked yes");
-    sessionStorage.setItem("r_go", "false");
-    setModalClose(true);
     setIsClicked(false);
+    setModalClose(true);
+    handleTermAccepted(true);
+    
+    //sessionStorage.setItem("r_go", "false")
   };
 
   const handleDecline = () => {
     setModalClose(true);
     setIsClicked(true);
+    handleTermAccepted(false);
   };
 
   return (
