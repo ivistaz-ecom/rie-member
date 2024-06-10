@@ -336,6 +336,10 @@ function Index() {
       setPhoneNumberError("Phone Number is required.");
       hasError = true;
       phoneNumberRef.current.focus();
+    } else if (phoneNumber.length < 10) {
+      setPhoneNumberError("Phone Number must be at least 10 digits.");
+      hasError = true;
+      phoneNumberRef.current.focus();
     } else {
       setPhoneNumberError();
     }

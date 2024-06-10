@@ -366,9 +366,8 @@ function Index() {
       setPhoneNumberError("Phone Number is required.");
       hasError = true;
       phoneNumberRef.current.focus();
-    }
-    if (phoneNumber <= 10) {
-      setPhoneNumberError("Invalid Phone Number.");
+    } else if (phoneNumber.length < 10) {
+      setPhoneNumberError("Phone Number must be at least 10 digits.");
       hasError = true;
       phoneNumberRef.current.focus();
     }
@@ -585,6 +584,8 @@ function Index() {
               ref={phoneNumberRef}
               className="-0 w-full rounded"
             />
+          </div>
+          <div>
             {phoneNumberError && (
               <p className="p-2 text-start text-red-500">{phoneNumberError}</p>
             )}
