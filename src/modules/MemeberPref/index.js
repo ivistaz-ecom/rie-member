@@ -492,7 +492,7 @@ function Index() {
               sizing="lg"
               placeholder="Search Interest"
               ref={interestsRef}
-              value={interestValue}
+              value={interestValue.search}
               onChange={(e) => setInterestValue({ search: e.target.value })}
             />
             {/* <Interests /> */}
@@ -501,10 +501,10 @@ function Index() {
               
             > */}
             <ul
-              className="flex h-40 w-full flex-wrap gap-3 overflow-auto md:w-11/12"
+              className="flex h-40 w-full flex-wrap gap-3 overflow-auto pt-4 md:w-11/12"
               ref={interestsRef}
             >
-              {interesting.map((item) => {
+              {filteredInterests.map((item) => {
                 const isSelected = selectedInterest.includes(item.value);
                 return (
                   <li key={item.id} className="">
