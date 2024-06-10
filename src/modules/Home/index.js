@@ -13,6 +13,7 @@ import SERVERCONFIG from "../../server.json";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
+import Whatsapp from "../../components/Whatsapp";
 
 function Index() {
   const navigate = useNavigate();
@@ -194,18 +195,16 @@ function Index() {
     <div className="flex h-screen flex-col items-center justify-center bg-[#210657]">
       <div className="w-full lg:w-1/3">
         {formData.loading && <Loader />}
-        <div className="flex justify-center mb-7">
-        <img src="/logo.svg" className="w-1/2" />
+        <div className="mb-7 flex justify-center">
+          <img src="/logo.svg" className="w-1/2" />
         </div>
         <div className="relative text-center">
-          
-          
           <h2 className="text-3xl text-white">WELCOME TO</h2>
           <h1 className="hue-animation bg-gradient-to-r from-[#f35626] to-[#feab3a] bg-clip-text text-center text-7xl font-black text-transparent">
             RIE 2025
-            </h1>
-            
-          <p className="font-alexa absolute right-12 top-[80px] text-5xl font-light text-white">
+          </h1>
+
+          <p className="absolute right-12 top-[80px] font-alexa text-5xl font-light text-white">
             South Asia
           </p>
         </div>
@@ -247,6 +246,7 @@ function Index() {
           )}
         </div>
       </div>
+      <Whatsapp />
     </div>
   );
 }

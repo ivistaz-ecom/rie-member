@@ -291,9 +291,9 @@ const Dashboard = () => {
             Once in a lifetime experience
           </h5>
           <p className="font-normal text-gray-700 dark:text-gray-400">
-            A regional event that provides an opportunity for SAsian
-            entrepreneurs to meet and connect, peer to peer learning. All this
-            around intense learning and phenomenal parties.
+            A regional event that provides an opportunity for South Asian
+            entrepreneurs to meet and connect. All this
+            around intense learning and phenomenal parties. Just Turn Up and Tune In.
           </p>
         </Card>
       </div>
