@@ -53,6 +53,11 @@ function Index() {
     specialrequest: "",
     interests: "",
   });
+
+  const [interestValue, setInterestValue] = useState({
+    search: "",
+    showInterest: false,
+  });
   const flyingfromRef = useRef(null);
   const dietprefRef = useRef(null);
   const allergiesRef = useRef(null);
@@ -131,6 +136,9 @@ function Index() {
       return;
     }
   };
+  const filteredInterests = interesting.filter((interest) =>
+    interest.value.toLowerCase().includes(interestValue.search.toLowerCase()),
+  );
 
   const submitMemberData = async (e) => {
     e.preventDefault();
@@ -431,12 +439,21 @@ function Index() {
             >
               Interests (Select Multiple)
             </label>
+            <TextInput
+              id="small"
+              type="text"
+              sizing="lg"
+              placeholder="Search Interest"
+              ref={interestsRef}
+              value={interestValue.search}
+              onChange={(e) => setInterestValue({ search: e.target.value })}
+            />
 
             <ul
-              className="flex w-full flex-wrap gap-3 md:w-11/12 h-40 overflow-auto"
+              className="flex h-40 w-full flex-wrap gap-3 overflow-auto pt-4 md:w-11/12"
               ref={interestsRef}
             >
-              {interesting.map((item) => {
+              {filteredInterests.map((item) => {
                 const isSelected = selectedInterest.includes(item.value);
                 return (
                   <li key={item.id} className="">
@@ -451,7 +468,6 @@ function Index() {
                     >
                       {item.icon}
                       {item.value}
-                      
                     </button>
                   </li>
                 );

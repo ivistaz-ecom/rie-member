@@ -62,9 +62,7 @@ function Index() {
   const shirtsizeRef = useRef(null);
   const specialrequestRef = useRef(null);
 
-  const filteredInterests = interesting.filter((interest) =>
-    interest.value.toLowerCase().includes(interestValue.search.toLowerCase()),
-  );
+
 
   const validate = () => {
     let valid = true;
