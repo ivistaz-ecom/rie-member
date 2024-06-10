@@ -222,7 +222,7 @@ const Dashboard = () => {
                 forward to welcoming you to RIE 2025 and embarking on this
                 incredible journey together.
               </p>
-              <Button className="w-full">Explore More</Button>
+              <Button className="w-full">More Information Coming Soon!</Button>
             </>
           ) : (
             <>
@@ -292,8 +292,8 @@ const Dashboard = () => {
           </h5>
           <p className="font-normal text-gray-700 dark:text-gray-400">
             A regional event that provides an opportunity for South Asian
-            entrepreneurs to meet and connect. All this
-            around intense learning and phenomenal parties. Just Turn Up and Tune In.
+            entrepreneurs to meet and connect. All this around intense learning
+            and phenomenal parties. Just Turn Up and Tune In.
           </p>
         </Card>
       </div>

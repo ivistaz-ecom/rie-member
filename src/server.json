@@ -1,6 +1,6 @@
 {
-  "RAZORPAY_KEYID_TEST": "rzp_live_YbP9A2ktMHQCdi",
-  "RAZORPAY_KEYID": "rzp_test_RRelhEO6wD10zb",
+  "RAZORPAY_KEYID": "rzp_live_YbP9A2ktMHQCdi",
+  "RAZORPAY_KEYID_TEST": "rzp_test_RRelhEO6wD10zb",
   "SUBMIT_URL": "https://eoapi.ivistaz.co/api/eoglobal/",
   "LOGIN_URL": "https://eoapi.ivistaz.co/api/login"
 }
