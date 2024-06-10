@@ -32,17 +32,25 @@ const TransactionDetails = () => {
   const formattedDate = formatDate(memberPaymentData[0].updated_at);
 
   const formatTime = (dateString) => {
+    // Create a Date object from the input string (assuming it's in UTC)
     const date = new Date(dateString);
 
-    const hours = String(date.getUTCHours()).padStart(2, "0");
-    const minutes = String(date.getUTCMinutes()).padStart(2, "0");
-    const seconds = String(date.getUTCSeconds()).padStart(2, "0");
+    // Convert the UTC time to IST
+    const istDate = new Date(
+      date.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
+    );
 
-    //return `${hours}:${minutes}:${seconds}`;
-    return date;
+    // Get hours, minutes, and seconds from the IST date
+    const hours = String(istDate.getHours()).padStart(2, "0");
+    const minutes = String(istDate.getMinutes()).padStart(2, "0");
+    const seconds = String(istDate.getSeconds()).padStart(2, "0");
+
+    // Return the formatted time string
+    return `${hours}:${minutes}:${seconds}`;
   };
-  const formattedTime = formatTime(memberPaymentData[0].updated_at);
 
+  // Assuming memberPaymentData[0].updated_at contains a UTC timestamp string
+  const formattedTime = formatTime(memberPaymentData[0].updated_at);
   return (
     <div className="flex min-h-screen flex-col p-6 lg:bg-[#F9F6FF] ">
       <div className="m-auto flex w-11/12 flex-col rounded-xl bg-[#FDFDFD] lg:w-1/3 lg:p-4">
