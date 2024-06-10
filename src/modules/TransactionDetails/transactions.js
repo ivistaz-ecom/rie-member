@@ -38,7 +38,8 @@ const TransactionDetails = () => {
     const minutes = String(date.getUTCMinutes()).padStart(2, "0");
     const seconds = String(date.getUTCSeconds()).padStart(2, "0");
 
-    return `${hours}:${minutes}:${seconds}`;
+    //return `${hours}:${minutes}:${seconds}`;
+    return date;
   };
   const formattedTime = formatTime(memberPaymentData[0].updated_at);
 
