@@ -27,6 +27,9 @@
     transform: translateX(0);
   }
 }
+input::placeholder {
+ font-size: 11px;
+}
 
 .shake {
   animation: shake 0.5s;
