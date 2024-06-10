@@ -207,12 +207,12 @@ function Index() {
           <form className="flex flex-col gap-4">
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="email1" value="Your email" />
+                {/* <Label htmlFor="email1" value="Your email" /> */}
               </div>
               <TextInput
                 id="email1"
                 type="text"
-                placeholder="name@flowbite.com"
+                placeholder="name@example.com"
                 sizing="lg"
                 value={formData.email}
                 onChange={(e) =>
