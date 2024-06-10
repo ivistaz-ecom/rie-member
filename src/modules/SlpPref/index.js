@@ -38,7 +38,7 @@ function Index() {
     loading: false,
     flyingfrom: slpPrefInfo ? prefSlp.flyingfrom : "",
     dietpref: slpPrefInfo ? prefSlp.dietpref : "",
-    allergies: slpPrefInfo ? prefSlp.allergies : "none",
+    allergies: slpPrefInfo ? prefSlp.allergies : "None",
     shirtsize: slpPrefInfo ? prefSlp.shirtsize : "",
     interests: [],
     specialrequest: slpPrefInfo ? prefSlp.specialrequest : "",

@@ -41,7 +41,7 @@ function Index() {
     loading: false,
     flyingfrom: memberPrefInfo ? prefMember.flyingfrom : "",
     dietpref: memberPrefInfo ? prefMember.dietpref : "",
-    allergies: memberPrefInfo ? prefMember.allergies : "none",
+    allergies: memberPrefInfo ? prefMember.allergies : "None",
     shirtsize: memberPrefInfo ? prefMember.shirtsize : "",
     interests: [],
     specialrequest: memberPrefInfo ? prefMember.specialrequest : "",
