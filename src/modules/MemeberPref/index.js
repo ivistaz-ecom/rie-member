@@ -409,7 +409,7 @@ function Index() {
                   memberPrefInfo && prefMember.shirtsize === "M" ? true : false
                 }
               >
-                L
+                M
               </option>
 
               <option

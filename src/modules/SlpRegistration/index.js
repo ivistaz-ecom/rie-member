@@ -130,8 +130,8 @@ function Index() {
   const [communicationCityError, setCommunicationCityError] = useState("");
   const [communicationAddress1Error, setCommunicationAddress1Error] =
     useState("");
-  const [communicationAddress2Error, setCommunicationAddress2Error] =
-    useState("");
+  // const [communicationAddress2Error, setCommunicationAddress2Error] =
+  //   useState("");
 
   const [communicationPostalCodeError, setCommunicationPostalCodeError] =
     useState("");
@@ -165,7 +165,7 @@ function Index() {
   const phoneNumberRef = useRef(null);
   const companyNameRef = useRef(null);
   const communication1Ref = useRef(null);
-  const communication2Ref = useRef(null);
+  // const communication2Ref = useRef(null);
   const communicationPostalCodeRef = useRef(null);
 
   const handleToggleSwitch = () => {
@@ -627,17 +627,17 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="Address Line 2"
-              ref={communication2Ref}
+              // ref={communication2Ref}
               value={communicationAddress.addressLine2}
               onChange={(e) =>
                 handleCommunicationAddressChange("addressLine2", e.target.value)
               }
             />
-            {communicationAddress2Error && (
+            {/* {communicationAddress2Error && (
               <p className="p-2 text-start text-red-500">
                 {communicationAddress2Error}
               </p>
-            )}
+            )} */}
           </div>
           <div>
             <TextInput

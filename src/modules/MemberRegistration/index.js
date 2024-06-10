@@ -148,13 +148,13 @@ function Index() {
   const companyNameRef = useRef(null);
   const industryRef = useRef(null);
   const communication1Ref = useRef(null);
-  const communication2Ref = useRef(null);
+  // const communication2Ref = useRef(null);
   const communicationCountryRef = useRef(null);
   const communicationStateRef = useRef(null);
   const communicationCityRef = useRef(null);
   const communicationPostalCodeRef = useRef(null);
   const billing1Ref = useRef(null);
-  const billing2Ref = useRef(null);
+  // const billing2Ref = useRef(null);
   const billingCountryRef = useRef(null);
   const billingStateRef = useRef(null);
   const billingCityRef = useRef(null);
@@ -168,8 +168,8 @@ function Index() {
   const [industryError, setIndustryError] = useState("");
   const [communicationAddress1Error, setCommunicationAddress1Error] =
     useState("");
-  const [communicationAddress2Error, setCommunicationAddress2Error] =
-    useState("");
+  // const [communicationAddress2Error, setCommunicationAddress2Error] =
+  //   useState("");
   const [communicationCountryError, setCommunicationCountryError] =
     useState("");
   const [communicationStateError, setCommunicationStateError] = useState("");
@@ -177,7 +177,7 @@ function Index() {
   const [communicationPostalCodeError, setCommunicationPostalCodeError] =
     useState("");
   const [billingAddress1Error, setBillingAddress1Error] = useState("");
-  const [billingAddress2Error, setBillingAddress2Error] = useState("");
+  // const [billingAddress2Error, setBillingAddress2Error] = useState("");
   const [billingCountryError, setBillingCountryError] = useState("");
   const [billingStateError, setBillingStateError] = useState("");
   const [billingCityError, setBillingCityError] = useState("");
@@ -344,13 +344,13 @@ function Index() {
     setCompanyNameError("");
     setIndustryError("");
     setCommunicationAddress1Error("");
-    setCommunicationAddress2Error("");
+    // setCommunicationAddress2Error("");
     setCommunicationCountryError("");
     setCommunicationStateError("");
     setCommunicationCityError("");
     setCommunicationPostalCodeError("");
     setBillingAddress1Error("");
-    setBillingAddress2Error("");
+    // setBillingAddress2Error("");
     setBillingCountryError("");
     setBillingStateError("");
     setBillingCityError("");
@@ -696,13 +696,13 @@ function Index() {
               onChange={(e) =>
                 handleCommunicationAddressChange("addressLine2", e.target.value)
               }
-              ref={communication2Ref}
+              // ref={communication2Ref}
             />
-            {communicationAddress2Error && (
+            {/* {communicationAddress2Error && (
               <p className="p-2 text-start text-red-500">
                 {communicationAddress2Error}
               </p>
-            )}
+            )} */}
           </div>
           <div>
             <TextInput
@@ -891,13 +891,13 @@ function Index() {
                   addressLine2: e.target.value,
                 })
               }
-              ref={billing2Ref}
+              // ref={billing2Ref}
             />
-            {billingAddress2Error && (
+            {/* {billingAddress2Error && (
               <p className="p-2 text-start text-red-500">
                 {billingAddress2Error}
               </p>
-            )}
+            )} */}
           </div>
           <div>
             <TextInput
