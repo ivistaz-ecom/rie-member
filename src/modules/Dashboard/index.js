@@ -63,18 +63,18 @@ const Dashboard = () => {
       const paymentInfo = data.paymentinfo.filter(
         (item) => item.eoid === isMemberId,
       );
-      sessionStorage.setItem("Form_submitted", JSON.stringify(paymentInfo));
+      sessionStorage.setItem("Form_submitted_t", JSON.stringify(paymentInfo));
 
       const rieMember = data.riemember.filter(
         (item) => item.eoid === isMemberId,
       );
-      sessionStorage.setItem("r_TokenMember_Info", JSON.stringify(rieMember));
+      sessionStorage.setItem("r_TokenMember_Info_t", JSON.stringify(rieMember));
 
       const rieMemberPref = data.riememberpref.filter(
         (item) => item.eoid === isMemberId,
       );
       sessionStorage.setItem(
-        "r_TokenMember_Pref",
+        "r_TokenMember_Pref_t",
         JSON.stringify(rieMemberPref),
       );
 
@@ -82,13 +82,13 @@ const Dashboard = () => {
         (item) => item.eoid === isMemberId,
       );
       sessionStorage.setItem(
-        "r_TokenMember_Slp",
+        "r_TokenMember_Slp_t",
         JSON.stringify(slpRegistration),
       );
 
       const slpPref = data.slppref.filter((item) => item.eoid === isMemberId);
       sessionStorage.setItem(
-        "r_TokenMember_SlpPref",
+        "r_TokenMember_SlpPref_t",
         JSON.stringify({ slppref: slpPref }),
       );
       if (

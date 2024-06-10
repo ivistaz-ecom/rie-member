@@ -7,13 +7,13 @@ const TransactionDetails = () => {
   const sessionPaymentInfo = sessionStorage.getItem("r_transactions");
   const memberPaymentData = JSON.parse(sessionPaymentInfo);
 
-  const sessionMemberPref = sessionStorage.getItem("member_preference");
+  const sessionMemberPref = sessionStorage.getItem("r_TokenMember_Pref_t");
   const memberPrefData = JSON.parse(sessionMemberPref);
 
   const sessionDataInfo = sessionStorage.getItem("r_TokenMember_Session");
   const memberDataInfo = JSON.parse(sessionDataInfo);
 
-  const sessionMemberInfo = sessionStorage.getItem("r_TokenMember_Info");
+  const sessionMemberInfo = sessionStorage.getItem("r_TokenMember_Info_t");
   const memberInfo = JSON.parse(sessionMemberInfo);
 
   // console.log(memberPaymentData)
