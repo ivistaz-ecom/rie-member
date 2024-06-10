@@ -484,15 +484,24 @@ function Index() {
               htmlFor="interest"
               className="text-1xl  text-start text-white"
             >
-              Interests (Multiple)
+              Interests (Select Multiple)
             </label>
+            <TextInput
+              id="small"
+              type="text"
+              sizing="lg"
+              placeholder="Search Interest"
+              ref={interestsRef}
+              value={interestValue}
+              onChange={(e) => setInterestValue({ search: e.target.value })}
+            />
             {/* <Interests /> */}
             {/* <ul
               className="flex w-full flex-wrap gap-3 md:w-11/12"
               
             > */}
             <ul
-              className="flex w-full flex-wrap gap-3 md:w-11/12"
+              className="flex h-40 w-full flex-wrap gap-3 overflow-auto md:w-11/12"
               ref={interestsRef}
             >
               {interesting.map((item) => {

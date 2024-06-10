@@ -429,11 +429,11 @@ function Index() {
               htmlFor="interest"
               className="text-1xl  text-start text-white"
             >
-              Interests
+              Interests (Select Multiple)
             </label>
 
             <ul
-              className="flex w-full flex-wrap gap-3 md:w-11/12"
+              className="flex w-full flex-wrap gap-3 md:w-11/12 h-40 overflow-auto"
               ref={interestsRef}
             >
               {interesting.map((item) => {
@@ -451,6 +451,7 @@ function Index() {
                     >
                       {item.icon}
                       {item.value}
+                      
                     </button>
                   </li>
                 );
