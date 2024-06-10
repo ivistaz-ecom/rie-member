@@ -546,7 +546,7 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="Search Country"
-              className="w-1/2 text-[12px] placeholder:text-gray-500"
+              className="w-1/2 text-[8px] placeholder:text-gray-500"
               value={searchCode.search}
               onChange={(e) =>
                 setSearchCode({ search: e.target.value, showCodes: true })
