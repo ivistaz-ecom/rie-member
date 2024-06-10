@@ -21,7 +21,7 @@ function Index() {
   const parseMemInfo = JSON.parse(memberInfo);
   const showBanner = sessionStorage.getItem("r_TokenMember_Info");
   const isShowBanner = JSON.parse(showBanner);
-  const gender = isShowBanner.riemembers.gender;
+  const gender = showBanner ? isShowBanner.riemembers.gender : "";
   const memberPrefInfo = sessionStorage.getItem("r_TokenMember_Pref");
   const parseMemPref = JSON.parse(memberPrefInfo);
   const prefMember = memberPrefInfo ? parseMemPref.memberpref : "";
@@ -32,7 +32,7 @@ function Index() {
 
   const memberTotal = sessionStorage.getItem("memberInfo");
   const parseMemberTotal = JSON.parse(memberTotal);
-  const memberCount = parseMemberTotal.memberCount;
+  const memberCount = memberTotal ? parseMemberTotal.memberCount : "";
 
   const [memberPref, setMemberPref] = useState({
     loading: false,
