@@ -16,29 +16,63 @@ import Cookies from "js-cookie";
 
 function Index() {
   const navigate = useNavigate();
+  const slpCount = sessionStorage.getItem("r_MemberCount");
   const memberSavedInfo = sessionStorage.getItem("r_TokenMember_Info");
   const parseMemSavedInfo = JSON.parse(memberSavedInfo);
   const memberContact = sessionStorage.getItem("r_TokenMember_Contact");
   const parserMemberContact = JSON.parse(memberContact);
   const memberInfo = sessionStorage.getItem("r_TokenMember_Session");
   const parseMemInfo = JSON.parse(memberInfo);
-  const slpSavedInfo = sessionStorage.getItem("r_TokenMember_Slp");
-  const parseSlpSavedInfo = JSON.parse(slpSavedInfo);
-  const slpContact = sessionStorage.getItem("r_TokenSLP_Contact");
-  const parseSlpContact = JSON.parse(slpContact);
-  const slpCount = sessionStorage.getItem("r_MemberCount");
 
   const [copyAddress, setCopyAddress] = useState(false);
   const [copyCompany, setCompany] = useState(false);
   const [gstNumber, setGstNumber] = useState("");
   const [isValidGst, setIsValidGst] = useState(false);
   const [hideGst, setIsHideGst] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState(
-    parseSlpContact ? parseSlpContact.mobile : "",
-  );
-  const [emailAddress, setEmailAddress] = useState(
-    parseSlpSavedInfo ? parseSlpSavedInfo.slp.email : "",
-  );
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [emailAddress, setEmailAddress] = useState();
+  const [gender, setGender] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+
+  useEffect(() => {
+    const slpSavedInfo = sessionStorage.getItem("r_TokenMember_Slp");
+    if (slpSavedInfo) {
+      const parseSlpSavedInfo = JSON.parse(slpSavedInfo);
+      setGender(parseSlpSavedInfo.slp.gender);
+      setFirstName(parseSlpSavedInfo.slp.firstname);
+      setLastName(parseSlpSavedInfo.slp.lastname);
+      setEmailAddress(parseSlpSavedInfo.slp.email);
+      setCommunicationAddress({
+        addressLine1: parseSlpSavedInfo.slp.addr1,
+        addressLine2: parseSlpSavedInfo.slp.addr2,
+        country: parseSlpSavedInfo.slp.country,
+        state: parseSlpSavedInfo.slp.state,
+        city: parseSlpSavedInfo.slp.city,
+        postalCode: parseSlpSavedInfo.slp.pin,
+      });
+      setSearchCountry({
+        country: parseSlpSavedInfo.slp.country,
+      });
+      setSearchCity({
+        city: parseSlpSavedInfo.slp.city,
+      });
+      setSearchState({
+        state: parseSlpSavedInfo.slp.state,
+      });
+      setCompanyName(parseSlpSavedInfo.slp.company);
+      setSearchIndustry({ search: parseSlpSavedInfo.slp.industry });
+      setGstNumber(parseSlpSavedInfo.slp.gstno);
+      setGender(parseSlpSavedInfo.slp.gender);
+    }
+    const slpContact = sessionStorage.getItem("r_TokenSLP_Contact");
+    if (slpContact) {
+      const parseSlpContact = JSON.parse(slpContact);
+      setPhoneNumber(parseSlpContact.mobile);
+      setSearchCode({ search: parseSlpContact.code });
+    }
+  }, []);
+
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [companyName, setCompanyName] = useState("");
   const [loader, setLoader] = useState(false);
@@ -46,17 +80,6 @@ function Index() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
-
-  const [gender, setGender] = useState(
-    parseSlpSavedInfo ? parseSlpSavedInfo.slp.gender : "",
-  );
-
-  const [firstName, setFirstName] = useState(
-    parseSlpSavedInfo ? parseSlpSavedInfo.slp.firstname : "",
-  );
-  const [lastName, setLastName] = useState(
-    parseSlpSavedInfo ? parseSlpSavedInfo.slp.lastname : "",
-  );
 
   const [searchCountry, setSearchCountry] = useState({
     search: "",
@@ -78,7 +101,7 @@ function Index() {
     showLists: false,
   });
   const [searchCode, setSearchCode] = useState({
-    search: parseSlpContact ? parseSlpContact.code : "",
+    search: "",
     showCodes: false,
   });
 

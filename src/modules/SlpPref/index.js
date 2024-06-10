@@ -16,35 +16,55 @@ import { useNavigate } from "react-router-dom";
 function Index() {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
+  const slpCount = sessionStorage.getItem("r_MemberCount");
   const [selectedInterest, setSelectedInterest] = useState([]);
   const memberInfo = sessionStorage.getItem("r_TokenMember_Session");
   const parseMemInfo = JSON.parse(memberInfo);
   const showBanner = sessionStorage.getItem("r_TokenMember_Info");
-  const isShowBanner = JSON.parse(showBanner);
-  const gender = showBanner ? isShowBanner.riemembers.gender : "";
+
   const memberPrefInfo = sessionStorage.getItem("r_TokenMember_Pref");
   const parseMemPref = JSON.parse(memberPrefInfo);
   const prefMember = memberPrefInfo ? parseMemPref.memberpref : "";
 
   const slpPrefInfo = sessionStorage.getItem("r_TokenMember_SlpPref");
-  const parseSlpPref = JSON.parse(slpPrefInfo);
-  const prefSlp = slpPrefInfo ? parseSlpPref.slppref : "";
+  const slpInfo = sessionStorage.getItem("r_TokenMember_Slp");
 
   const memberTotal = sessionStorage.getItem("memberInfo");
   const parseMemberTotal = JSON.parse(memberTotal);
   const memberCount = memberTotal ? parseMemberTotal.memberCount : "";
-
+  const [gender, setGender] = useState();
   const [memberPref, setMemberPref] = useState({
     loading: false,
-    flyingfrom: slpPrefInfo ? prefSlp.flyingfrom : "",
-    dietpref: slpPrefInfo ? prefSlp.dietpref : "",
-    allergies: slpPrefInfo ? prefSlp.allergies : "",
-    shirtsize: slpPrefInfo ? prefSlp.shirtsize : "",
+    flyingfrom: "",
+    dietpref: "",
+    allergies: "",
+    shirtsize: "",
     interests: [],
-    specialrequest: slpPrefInfo ? prefSlp.specialrequest : "",
+    specialrequest: "",
   });
   useEffect(() => {
-    setSelectedInterest(slpPrefInfo ? prefSlp.interests : "");
+    if (slpInfo) {
+      const slpInforData = JSON.parse(slpInfo);
+      const newSlpData = slpInforData.slp;
+      console.log(newSlpData.gender);
+      setGender(newSlpData.gender);
+    }
+    if (showBanner) {
+      const isShowBanner = JSON.parse(showBanner);
+    }
+    if (slpPrefInfo) {
+      const parseSlpPref = JSON.parse(slpPrefInfo);
+      const prefSlp = parseSlpPref.slppref;
+      setMemberPref({
+        flyingfrom: prefSlp.flyingfrom,
+        dietpref: prefSlp.dietpref,
+        allergies: prefSlp.allergies,
+        shirtsize: prefSlp.shirtsize,
+        interests: prefSlp.interests,
+        specialrequest: prefSlp.specialrequest,
+      });
+      setSelectedInterest(prefSlp.interests);
+    }
   }, []);
   const [errors, setErrors] = useState({
     flyingfrom: "",
@@ -296,34 +316,26 @@ function Index() {
               <option value="">Select Diet Preferences</option>
               <option
                 value="Veg"
-                selected={
-                  slpPrefInfo && prefSlp.dietpref === "Veg" ? true : false
-                }
+                selected={memberPref.dietpref === "Veg" ? true : false}
               >
                 Veg
               </option>
               <option
                 value="Non-Veg"
-                selected={
-                  slpPrefInfo && prefSlp.dietpref === "Non-Veg" ? true : false
-                }
+                selected={memberPref.dietpref === "Non-Veg" ? true : false}
               >
                 Non-Veg
               </option>
 
               <option
                 value="Jain"
-                selected={
-                  slpPrefInfo && prefSlp.dietpref === "Jain" ? true : false
-                }
+                selected={memberPref.dietpref === "Jain" ? true : false}
               >
                 Jain
               </option>
               <option
                 value="Vegan"
-                selected={
-                  slpPrefInfo && prefSlp.dietpref === "Vegan" ? true : false
-                }
+                selected={memberPref.dietpref === "Vegan" ? true : false}
               >
                 Vegan
               </option>
@@ -375,92 +387,62 @@ function Index() {
               <option value="">Select Shirt Size</option>
               <option
                 value="2XS"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "2XS"
-                    ? true
-                    : false
-                }
+                selected={memberPref.shirtsize === "2XS" ? true : false}
               >
                 2XS
               </option>
               <option
                 value="XS"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "XS" ? true : false
-                }
+                selected={memberPref.shirtsize === "XS" ? true : false}
               >
                 XS
               </option>
               <option
                 value="S"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "S" ? true : false
-                }
+                selected={memberPref.shirtsize === "S" ? true : false}
               >
                 S
               </option>
               <option
                 value="M"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "M" ? true : false
-                }
+                selected={memberPref.shirtsize === "M" ? true : false}
               >
                 M
               </option>
 
               <option
                 value="L"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "L" ? true : false
-                }
+                selected={memberPref.shirtsize === "L" ? true : false}
               >
                 L
               </option>
               <option
                 value="XL"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "XL" ? true : false
-                }
+                selected={memberPref.shirtsize === "XL" ? true : false}
               >
                 XL
               </option>
               <option
                 value="2XL"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "2XL"
-                    ? true
-                    : false
-                }
+                selected={memberPref.shirtsize === "2XL" ? true : false}
               >
                 2XL
               </option>
               <option
                 value="3XL"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "3XL"
-                    ? true
-                    : false
-                }
+                selected={memberPref.shirtsize === "3XL" ? true : false}
               >
                 3XL
               </option>
               <option
                 value="4XL"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "4XL"
-                    ? true
-                    : false
-                }
+                selected={memberPref.shirtsize === "4XL" ? true : false}
               >
                 4XL
               </option>
               <option
                 value="5XL"
-                selected={
-                  memberPrefInfo && prefMember.shirtsize === "5XL"
-                    ? true
-                    : false
-                }
+                selected={memberPref.shirtsize === "5XL" ? true : false}
               >
                 5XL
               </option>
@@ -491,13 +473,18 @@ function Index() {
               value={interestValue.search}
               onChange={(e) => setInterestValue({ search: e.target.value })}
             />
-
+            {/* {console.log(memberPref.interests)} */}
             <ul
               className="flex h-40 w-full flex-wrap gap-3 overflow-auto pt-4 md:w-11/12"
               ref={interestsRef}
             >
               {filteredInterests.map((item) => {
                 const isSelected = selectedInterest.includes(item.value);
+                const output = memberPref.interests
+                  .map((item) => `"${item}"`)
+                  .join(",");
+                console.log(output);
+                const isSpecialInterest = output.includes(item.value);
                 return (
                   <li key={item.id} className="">
                     <button
@@ -505,8 +492,10 @@ function Index() {
                       className={`flex items-center gap-1 rounded-3xl border border-gray-300 px-2 py-1 text-sm font-thin ${
                         isSelected
                           ? "bg-[#380C72] text-white"
-                          : "bg-white text-black"
-                      }`}
+                          : isSpecialInterest
+                            ? "bg-cyan-800 text-white"
+                            : "bg-white text-black"
+                      } `}
                       onClick={() => handleInterestSelect(item.value)}
                     >
                       {item.icon}

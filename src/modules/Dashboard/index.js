@@ -87,7 +87,10 @@ const Dashboard = () => {
       );
 
       const slpPref = data.slppref.filter((item) => item.eoid === isMemberId);
-      sessionStorage.setItem("r_TokenMember_SlpPref", JSON.stringify(slpPref));
+      sessionStorage.setItem(
+        "r_TokenMember_SlpPref",
+        JSON.stringify({ slppref: slpPref }),
+      );
       if (
         paymentInfo.length > 0 &&
         rieMember.length > 0 &&
