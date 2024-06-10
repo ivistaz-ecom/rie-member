@@ -367,6 +367,11 @@ function Index() {
       hasError = true;
       phoneNumberRef.current.focus();
     }
+    if (phoneNumber <= 10) {
+      setPhoneNumberError("Invalid Phone Number.");
+      hasError = true;
+      phoneNumberRef.current.focus();
+    }
     if (companyName === "") {
       setCompanyNameError("Company Name is required.");
       hasError = true;
@@ -412,11 +417,11 @@ function Index() {
       hasError = true;
       billing1Ref.current.focus();
     }
-    if (billingAddress.addressLine2 === "") {
-      setBillingAddress2Error("Address Line 2 is required.");
-      hasError = true;
-      billing2Ref.current.focus();
-    }
+    // if (billingAddress.addressLine2 === "") {
+    //   setBillingAddress2Error("Address Line 2 is required.");
+    //   hasError = true;
+    //   billing2Ref.current.focus();
+    // }
     if (billingAddress.country === "") {
       setBillingCountryError("Country is required.");
       hasError = true;
@@ -540,8 +545,8 @@ function Index() {
               id="small"
               type="text"
               sizing="lg"
-              placeholder="search Country"
-              className="w-1/2"
+              placeholder="Search Country"
+              className="w-1/2 text-[12px] placeholder:text-gray-500"
               value={searchCode.search}
               onChange={(e) =>
                 setSearchCode({ search: e.target.value, showCodes: true })
