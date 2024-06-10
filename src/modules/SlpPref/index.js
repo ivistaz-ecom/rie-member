@@ -8,7 +8,7 @@ import {
   Modal,
 } from "flowbite-react";
 import Loader from "../../components/Loader";
-import { interest } from "../../utils/data";
+import { interesting, colourOptions } from "../../utils/data";
 import SERVERCONFIG from "../../server.json";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,7 @@ function Index() {
     loading: false,
     flyingfrom: slpPrefInfo ? prefSlp.flyingfrom : "",
     dietpref: slpPrefInfo ? prefSlp.dietpref : "",
-    allergies: slpPrefInfo ? prefSlp.allergies : "",
+    allergies: slpPrefInfo ? prefSlp.allergies : "none",
     shirtsize: slpPrefInfo ? prefSlp.shirtsize : "",
     interests: [],
     specialrequest: slpPrefInfo ? prefSlp.specialrequest : "",
@@ -335,7 +335,7 @@ function Index() {
               id="small"
               type="text"
               sizing="lg"
-              placeholder="Allergies(if any), or type none"
+              placeholder="Allergies(if any)"
               ref={allergiesRef}
               value={memberPref.allergies}
               onChange={(e) =>
@@ -419,10 +419,11 @@ function Index() {
             )}
             <div className="my-4">
               <Button size="xs" onClick={() => setOpenModal(true)}>
-                Size Chart
+                Refer Size Chart
               </Button>
             </div>
           </div>
+
           <div className="space-y-1 text-start">
             <label
               htmlFor="interest"
@@ -430,12 +431,13 @@ function Index() {
             >
               Interests
             </label>
+
             <ul
               className="flex w-full flex-wrap gap-3 md:w-11/12"
               ref={interestsRef}
             >
-              {interest.map((item) => {
-                const isSelected = selectedInterest.includes(item.interest);
+              {interesting.map((item) => {
+                const isSelected = selectedInterest.includes(item.value);
                 return (
                   <li key={item.id} className="">
                     <button
@@ -445,10 +447,10 @@ function Index() {
                           ? "bg-[#380C72] text-white"
                           : "bg-white text-black"
                       }`}
-                      onClick={() => handleInterestSelect(item.interest)}
+                      onClick={() => handleInterestSelect(item.value)}
                     >
                       {item.icon}
-                      {item.interest}
+                      {item.value}
                     </button>
                   </li>
                 );

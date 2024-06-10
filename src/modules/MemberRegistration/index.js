@@ -382,11 +382,11 @@ function Index() {
       hasError = true;
       communication1Ref.current.focus();
     }
-    if (communicationAddress.addressLine2 === "") {
-      setCommunicationAddress2Error("Address Line 2 is required.");
-      hasError = true;
-      communication2Ref.current.focus();
-    }
+    // if (communicationAddress.addressLine2 === "") {
+    //   setCommunicationAddress2Error("Address Line 2 is required.");
+    //   hasError = true;
+    //   communication2Ref.current.focus();
+    // }
     if (searchCountry.country === "") {
       setCommunicationCountryError("Country is required.");
       hasError = true;
@@ -540,7 +540,7 @@ function Index() {
               id="small"
               type="text"
               sizing="lg"
-              placeholder="Code"
+              placeholder="search Country"
               className="w-1/2"
               value={searchCode.search}
               onChange={(e) =>

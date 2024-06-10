@@ -360,13 +360,13 @@ function Index() {
     } else {
       setCommunicationAddress1Error();
     }
-    if (communicationAddress.addressLine2 === "") {
-      setCommunicationAddress2Error("Address Line 2 is required.");
-      hasError = true;
-      communication2Ref.current.focus();
-    } else {
-      setCommunicationAddress2Error();
-    }
+    // if (communicationAddress.addressLine2 === "") {
+    //   setCommunicationAddress2Error("Address Line 2 is required.");
+    //   hasError = true;
+    //   communication2Ref.current.focus();
+    // } else {
+    //   setCommunicationAddress2Error();
+    // }
     if (searchCountry.country === "") {
       setCommunicationCountryError("Country is required.");
       hasError = true;

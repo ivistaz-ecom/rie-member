@@ -6,9 +6,10 @@ import {
   Label,
   Textarea,
   Modal,
+  ListGroup,
 } from "flowbite-react";
 import Loader from "../../components/Loader";
-import { interest } from "../../utils/data";
+import { interesting } from "../../utils/data";
 import SERVERCONFIG from "../../server.json";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -17,11 +18,12 @@ function Index() {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [selectedInterest, setSelectedInterest] = useState([]);
+
   const memberInfo = sessionStorage.getItem("r_TokenMember_Session");
   const parseMemInfo = JSON.parse(memberInfo);
   const showBanner = sessionStorage.getItem("r_TokenMember_Info");
   const isShowBanner = JSON.parse(showBanner);
-  const gender = isShowBanner.riemembers.gender;
+  const gender = showBanner ? isShowBanner.riemembers.gender : "";
   const memberPrefInfo = sessionStorage.getItem("r_TokenMember_Pref");
   const parseMemPref = JSON.parse(memberPrefInfo);
   const prefMember = memberPrefInfo ? parseMemPref.memberpref : "";
@@ -30,11 +32,16 @@ function Index() {
   const parseMemberTotal = JSON.parse(memberTotal);
   const memberCount = parseMemberTotal.memberCount;
 
+  const [interestValue, setInterestValue] = useState({
+    search: "",
+    showInterest: false,
+  });
+
   const [memberPref, setMemberPref] = useState({
     loading: false,
     flyingfrom: memberPrefInfo ? prefMember.flyingfrom : "",
     dietpref: memberPrefInfo ? prefMember.dietpref : "",
-    allergies: memberPrefInfo ? prefMember.allergies : "",
+    allergies: memberPrefInfo ? prefMember.allergies : "none",
     shirtsize: memberPrefInfo ? prefMember.shirtsize : "",
     interests: [],
     specialrequest: memberPrefInfo ? prefMember.specialrequest : "",
@@ -53,8 +60,11 @@ function Index() {
   const dietprefRef = useRef(null);
   const allergiesRef = useRef(null);
   const shirtsizeRef = useRef(null);
-  const interestsRef = useRef(null);
   const specialrequestRef = useRef(null);
+
+  const filteredInterests = interesting.filter((interest) =>
+    interest.value.toLowerCase().includes(interestValue.search.toLowerCase()),
+  );
 
   const validate = () => {
     let valid = true;
@@ -191,6 +201,8 @@ function Index() {
     }
   };
 
+  const interestsRef = React.useRef(null);
+
   const renderModal = () => (
     <>
       <Modal show={openModal} onClose={() => setOpenModal(false)} size="md">
@@ -226,7 +238,7 @@ function Index() {
     setSelectedInterest(updatedSelectedInterest);
     setMemberPref((prevPreferences) => ({
       ...prevPreferences,
-      interests: updatedSelectedInterest,
+      value: updatedSelectedInterest,
     }));
   };
 
@@ -335,7 +347,7 @@ function Index() {
               id="small"
               type="text"
               sizing="lg"
-              placeholder="Allergies(if any), or type none"
+              placeholder="Allergies(if any)"
               ref={allergiesRef}
               value={memberPref.allergies}
               onChange={(e) =>
@@ -366,12 +378,22 @@ function Index() {
             >
               <option value="">Select Shirt Size</option>
               <option
+                value="2XS"
+                selected={
+                  memberPrefInfo && prefMember.shirtsize === "2XS"
+                    ? true
+                    : false
+                }
+              >
+                2XS
+              </option>
+              <option
                 value="XS"
                 selected={
                   memberPrefInfo && prefMember.shirtsize === "XS" ? true : false
                 }
               >
-                XS
+                S
               </option>
               <option
                 value="S"
@@ -379,7 +401,7 @@ function Index() {
                   memberPrefInfo && prefMember.shirtsize === "S" ? true : false
                 }
               >
-                S
+                M
               </option>
               <option
                 value="M"
@@ -387,8 +409,9 @@ function Index() {
                   memberPrefInfo && prefMember.shirtsize === "M" ? true : false
                 }
               >
-                M
+                L
               </option>
+
               <option
                 value="L"
                 selected={
@@ -406,14 +429,44 @@ function Index() {
                 XL
               </option>
               <option
-                value="XXL"
+                value="2XL"
                 selected={
-                  memberPrefInfo && prefMember.shirtsize === "XXL"
+                  memberPrefInfo && prefMember.shirtsize === "2XL"
                     ? true
                     : false
                 }
               >
-                XXL
+                2XL
+              </option>
+              <option
+                value="3XL"
+                selected={
+                  memberPrefInfo && prefMember.shirtsize === "3XL"
+                    ? true
+                    : false
+                }
+              >
+                3XL
+              </option>
+              <option
+                value="4XL"
+                selected={
+                  memberPrefInfo && prefMember.shirtsize === "4XL"
+                    ? true
+                    : false
+                }
+              >
+                4XL
+              </option>
+              <option
+                value="5XL"
+                selected={
+                  memberPrefInfo && prefMember.shirtsize === "5XL"
+                    ? true
+                    : false
+                }
+              >
+                5XL
               </option>
             </Select>
             {errors.shirtsize && (
@@ -421,23 +474,29 @@ function Index() {
             )}
             <div className="my-4">
               <Button size="xs" onClick={() => setOpenModal(true)}>
-                Size Chart
+                Refer Size Chart
               </Button>
             </div>
           </div>
+          <div></div>
           <div className="space-y-1 text-start">
             <label
               htmlFor="interest"
               className="text-1xl  text-start text-white"
             >
-              Interests
+              Interests (Multiple)
             </label>
+            {/* <Interests /> */}
+            {/* <ul
+              className="flex w-full flex-wrap gap-3 md:w-11/12"
+              
+            > */}
             <ul
               className="flex w-full flex-wrap gap-3 md:w-11/12"
               ref={interestsRef}
             >
-              {interest.map((item) => {
-                const isSelected = selectedInterest.includes(item.interest);
+              {interesting.map((item) => {
+                const isSelected = selectedInterest.includes(item.value);
                 return (
                   <li key={item.id} className="">
                     <button
@@ -447,15 +506,16 @@ function Index() {
                           ? "bg-[#380C72] text-white"
                           : "bg-white text-black"
                       }`}
-                      onClick={() => handleInterestSelect(item.interest)}
+                      onClick={() => handleInterestSelect(item.value)}
                     >
                       {item.icon}
-                      {item.interest}
+                      {item.value}
                     </button>
                   </li>
                 );
               })}
             </ul>
+            {/* </ul> */}
             {errors.interests && (
               <div className="text-red-500">{errors.interests}</div>
             )}
