@@ -117,12 +117,18 @@ const PaymentGateway = () => {
       <div>
         <div className="flex w-full items-center justify-between">
           <p className="text-gray-200">Member Fee</p>
-          <p className="text-gray-200">{parseMemberData.memberFee}</p>
+          <p className="text-gray-200">
+            {symbol}
+            {parseMemberData.memberFee}
+          </p>
         </div>
         {parseMemberData.memberCount > 1 && (
           <div className="flex w-full items-center justify-between">
             <p className="text-gray-200">SLP Fee</p>
-            <p className="text-gray-200">{parseMemberData.slpFee}</p>
+            <p className="text-gray-200">
+              >{symbol}
+              {parseMemberData.slpFee}
+            </p>
           </div>
         )}
         {/* <div className="flex w-full items-center justify-between">
@@ -137,16 +143,23 @@ const PaymentGateway = () => {
         )}
         <div className="flex w-full items-center justify-between">
           <p className="text-gray-200">Payable Amount:</p>
-          <p className="text-gray-200">{totalAmount}</p>
+          <p className="text-gray-200">
+            {symbol}
+            {totalAmount}
+          </p>
         </div>
         <div className="flex w-full items-center justify-between">
           <p className="text-gray-200">GST({GST_PERCENTAGE}%):</p>
-          <p className="text-gray-200">{includingGST}</p>
+          <p className="text-gray-200">
+            {symbol}
+            {includingGST}
+          </p>
         </div>
         <div className="flex w-full items-center justify-between">
           <p className="text-xl font-semibold text-white">Total Amount</p>
           {/* <p className="text-2xl text-white font-semibold">{state.currencySymbol} {state.earlyBirdEnable ? (parseInt(tAmount) - parseInt(tEarlyAmount) - parseInt(tVoucher) + parseInt(tGst)) : parseInt(tAmount) - parseInt(tVoucher) + parseInt(tGst)}</p> */}
           <p className="text-2xl font-semibold text-white">
+            {symbol}
             {chargeableAmount}
           </p>
         </div>
