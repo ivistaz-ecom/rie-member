@@ -79,7 +79,7 @@ function Index() {
   };
 
   const fetchedData = async () => {
-    const email = formData.email;
+    const email = formData.email.toLowerCase();
     const token = Cookies.get("token");
 
     try {
@@ -219,7 +219,7 @@ function Index() {
                 type="text"
                 placeholder="name@example.com"
                 sizing="lg"
-                value={formData.email}
+                value={formData.email.toLowerCase()}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }

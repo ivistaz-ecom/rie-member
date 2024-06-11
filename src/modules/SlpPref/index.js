@@ -21,7 +21,6 @@ function Index() {
   const memberInfo = sessionStorage.getItem("r_TokenMember_Session");
   const parseMemInfo = JSON.parse(memberInfo);
   const showBanner = sessionStorage.getItem("r_TokenMember_Info");
-
   const memberPrefInfo = sessionStorage.getItem("r_TokenMember_Pref");
   const parseMemPref = JSON.parse(memberPrefInfo);
   const prefMember = memberPrefInfo ? parseMemPref.memberpref : "";
@@ -42,6 +41,7 @@ function Index() {
     interests: [],
     specialrequest: "",
   });
+  
   useEffect(() => {
     if (slpInfo) {
       const slpInforData = JSON.parse(slpInfo);
