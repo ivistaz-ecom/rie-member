@@ -84,7 +84,7 @@ function Index() {
 
     try {
       const response = await fetch(
-        "https://eoapi.ivistaz.co/api/eoglobal/email/check-email",
+        `${SERVERCONFIG.SUBMIT_URL}email/check-email`,
         {
           method: "POST",
           headers: {

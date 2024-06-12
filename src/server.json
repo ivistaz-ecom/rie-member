@@ -1,8 +1,8 @@
 {
   "RAZORPAY_KEYID_TEST": "rzp_live_YbP9A2ktMHQCdi",
   "RAZORPAY_KEYID": "rzp_test_RRelhEO6wD10zb",
-  "SUBMIT_URL": "https://eoapi.ivistaz.co/api/eoglobal/",
-  "LOGIN_URL": "https://eoapi.ivistaz.co/api/login",
+  "SUBMIT_URL": "https://dashboard.rie2025.com/api/eoglobal/",
+  "LOGIN_URL": "https://dashboard.rie2025.com/api/login",
   "MEMBER_FEE": "49000",
   "SLP_FEE": "49000",
   "MEMBER_FEE_USD": "2500",
