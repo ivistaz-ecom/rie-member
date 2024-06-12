@@ -17,7 +17,7 @@ import Stepper from "../../components/Stepper";
 
 function Index() {
   const navigate = useNavigate();
-  const slpCount = sessionStorage.getItem("r_MemberCount");
+  //const slpCount = sessionStorage.getItem("r_MemberCount");
   const memberSavedInfo = sessionStorage.getItem("r_TokenMember_Info");
   const parseMemSavedInfo = JSON.parse(memberSavedInfo);
   const memberContact = sessionStorage.getItem("r_TokenMember_Contact");
@@ -323,9 +323,18 @@ function Index() {
   const filteredCities = cities.filter((city) =>
     city.name.toLowerCase().includes(communicationAddress.city.toLowerCase()),
   );
+
   const filteredIndustries = memberIndustries.filter((industry) =>
-    industry.type.toLowerCase().includes(searchIndustry.search.toLowerCase()),
+    industry.type
+      .toLowerCase()
+      .includes(
+        searchIndustry.search ? searchIndustry.search : "".toLowerCase(),
+      ),
   );
+  if (searchIndustry.search === "") {
+    setSearchIndustry({ showLists: false });
+  }
+
   const filteredCountryCodes = countryList.filter((country) =>
     country.name.toLowerCase().includes(searchCode.search.toLowerCase()),
   );
@@ -375,20 +384,20 @@ function Index() {
     } else {
       setPhoneNumberError();
     }
-    if (companyName === "") {
-      setCompanyNameError("Company Name is required.");
-      hasError = true;
-      companyNameRef.current.focus();
-    } else {
-      setCompanyNameError();
-    }
-    if (searchIndustry.search === "") {
-      setIndustryError("Industry is required.");
-      hasError = true;
-      industryRef.current.focus();
-    } else {
-      setIndustryError();
-    }
+    // if (companyName === "") {
+    //   setCompanyNameError("Company Name is required.");
+    //   hasError = true;
+    //   companyNameRef.current.focus();
+    // } else {
+    //   setCompanyNameError();
+    // }
+    // if (searchIndustry.search === "") {
+    //   setIndustryError("Industry is required.");
+    //   hasError = true;
+    //   industryRef.current.focus();
+    // } else {
+    //   setIndustryError();
+    // }
     if (communicationAddress.addressLine1 === "") {
       setCommunicationAddress1Error("Address Line 1 is required.");
       hasError = true;
@@ -638,7 +647,7 @@ function Index() {
         <h2 className="py-4 text-start text-xl font-semibold text-white">
           Communication Address
         </h2>
-        {!slpCount === 1 && (
+        {memberCount > 1 && (
           <div className="-pt-4 flex max-w-md flex-col gap-4 pb-6">
             <label class="inline-flex cursor-pointer items-center">
               <input
@@ -829,7 +838,7 @@ function Index() {
         <h2 className="py-4 text-start text-xl font-semibold text-white">
           Business Details
         </h2>
-        {!slpCount === 1 && (
+        {memberCount > 1 && (
           <div className="-pt-4 flex max-w-md flex-col gap-4 pb-6">
             <label class="inline-flex cursor-pointer items-center">
               <input
