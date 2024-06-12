@@ -251,6 +251,14 @@ function Index() {
     </>
   );
 
+  useEffect(() => {
+    // Retrieve previously selected interests from sessionStorage
+    const storedInterests = sessionStorage.getItem("selectedInterests");
+    if (storedInterests) {
+      setSelectedInterest(JSON.parse(storedInterests));
+    }
+  }, []);
+
   const handleInterestSelect = (selected) => {
     let updatedSelectedInterest;
     if (selectedInterest.includes(selected)) {
@@ -267,6 +275,11 @@ function Index() {
       ...prevPreferences,
       interests: updatedSelectedInterest,
     }));
+    // Store selected interests in sessionStorage
+    sessionStorage.setItem(
+      "selectedInterests",
+      JSON.stringify(updatedSelectedInterest),
+    );
   };
 
   return (
@@ -293,6 +306,7 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="Location"
+              color={errors.flyingfrom && "failure"}
               ref={flyingfromRef}
               value={memberPref.flyingfrom}
               onChange={(e) =>
@@ -317,6 +331,7 @@ function Index() {
               required
               sizing="lg"
               ref={dietprefRef}
+              color={errors.dietpref && "failure"}
               onChange={(e) =>
                 setMemberPref((prevMemberPref) => ({
                   ...prevMemberPref,
@@ -388,6 +403,7 @@ function Index() {
               required
               sizing="lg"
               ref={shirtsizeRef}
+              color={errors.shirtsize && "failure"}
               onChange={(e) =>
                 setMemberPref((prevMemberPref) => ({
                   ...prevMemberPref,
@@ -480,6 +496,7 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="Search Interest"
+              color={errors.interests && "failure"}
               ref={interestsRef}
               value={interestValue.search}
               onChange={(e) => setInterestValue({ search: e.target.value })}

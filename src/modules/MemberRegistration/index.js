@@ -57,7 +57,7 @@ function Index() {
     showLists: false,
   });
   const [searchCode, setSearchCode] = useState({
-    search: parserMemberContact ? parserMemberContact.code : "",
+    search: parserMemberContact ? parserMemberContact.code : "+91",
     showCodes: false,
   });
   const [searchCountry, setSearchCountry] = useState({
@@ -153,6 +153,7 @@ function Index() {
   const phoneNumberRef = useRef(null);
   const companyNameRef = useRef(null);
   const industryRef = useRef(null);
+  const codeRef = useRef(null);
   const communication1Ref = useRef(null);
   // const communication2Ref = useRef(null);
   const communicationCountryRef = useRef(null);
@@ -169,6 +170,7 @@ function Index() {
   //const billingRef = useRef(null);
 
   const [genderError, setGenderError] = useState("");
+  const [codeError, setCodeError] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [companyNameError, setCompanyNameError] = useState("");
   const [industryError, setIndustryError] = useState("");
@@ -188,6 +190,8 @@ function Index() {
   const [billingStateError, setBillingStateError] = useState("");
   const [billingCityError, setBillingCityError] = useState("");
   const [billingPostalCodeError, setBillingPostalCodeError] = useState("");
+
+  const [isexistsPostalCode, setIsexistsPostalCode] = useState(true);
 
   useEffect(() => {
     if (!memberWelcomeInfo) {
@@ -312,40 +316,268 @@ function Index() {
     }
   };
 
-  const filteredIndustries = memberIndustries.filter((industry) =>
-    industry.type.toLowerCase().includes(searchIndustry.search.toLowerCase()),
-  );
-  const filteredCountryCodes = countryList.filter((country) =>
-    country.name.toLowerCase().includes(searchCode.search.toLowerCase()),
-  );
-  const filteredCountry = countries.filter((country) =>
-    country.name
-      .toLowerCase()
-      .includes(communicationAddress.country.toLowerCase()),
-  );
-  const filteredStates = states.filter((state) =>
-    state.name.toLowerCase().includes(communicationAddress.state.toLowerCase()),
-  );
+  const [filteredIndustries, setFilteredIndustries] = useState([]);
+  const [isExistsIndustry, setIsexistsIndustry] = useState();
+  const [isExistsAddr1, setIsExistsAddr1] = useState(true);
 
-  const filteredCities = cities.filter((city) =>
-    city.name.toLowerCase().includes(communicationAddress.city.toLowerCase()),
-  );
+  useEffect(() => {
+    if (searchIndustry.search) {
+      const filteredIndustries = memberIndustries.filter((industry) =>
+        industry.type
+          .toLowerCase()
+          .includes(searchIndustry.search.toLowerCase()),
+      );
+      console.log(searchIndustry.search);
 
-  const filteredBillCountry = countries.filter((country) =>
-    country.name.toLowerCase().includes(billingAddress.country.toLowerCase()),
-  );
-  const filteredBillStates = states.filter((state) =>
-    state.name.toLowerCase().includes(billingAddress.state.toLowerCase()),
-  );
+      if (filteredIndustries.length === 0) {
+        setIndustryError("This is not a valid input.");
+        console.log("This is not a valid input.");
+        setIsexistsIndustry(false);
+        // setSearchIndustry({ showLists: true });
+      } else {
+        setIndustryError("");
+        console.log("This is a valid input.");
+        setIsexistsIndustry(true);
+      }
 
-  const filteredBillCities = cities.filter((city) =>
-    city.name.toLowerCase().includes(billingAddress.city.toLowerCase()),
-  );
+      setFilteredIndustries(filteredIndustries);
+    } else {
+      setFilteredIndustries([]);
+      setIndustryError("");
+    }
+  }, [searchIndustry.search, memberIndustries]);
+
+  const [filteredCountryCodes, setFilteredCountryCodes] = useState([]);
+  const [isExistsCountryCode, setIsexistsCountryCode] = useState(false);
+  useEffect(() => {
+    if (searchCode.search) {
+      const filteredCountryCodes = countryList.filter((country) =>
+        country.name.toLowerCase().includes(searchCode.search.toLowerCase()),
+      );
+
+      if (filteredCountryCodes.length === 0) {
+        setCodeError("This is not a valid Country Code.");
+        console.log("This is not a valid input.");
+        setSearchCode({ showCodes: false });
+        setIsexistsCountryCode(true);
+        //setIsexistsIndustry(false);
+        // setSearchIndustry({ showLists: true });
+      } else {
+        setCodeError("");
+        console.log("This is a valid input.");
+        console.log(searchCode.search);
+        setSearchCode({ showCodes: true });
+        //setIsexistsIndustry(true);
+        setFilteredCountryCodes(filteredCountryCodes);
+        setIsexistsCountryCode(true);
+      }
+
+      setFilteredIndustries(filteredIndustries);
+    } else {
+      setFilteredIndustries([]);
+      setCodeError("");
+    }
+  }, [searchCode.search, countryList]);
+
+  const [filteredCountry, SetFilteredCountry] = useState([]);
+  const [isExistsCountry, setIsexistsCountry] = useState(true);
+  useEffect(() => {
+    if (communicationAddress.country) {
+      const filteredCountry = countries.filter((country) =>
+        country.name
+          .toLowerCase()
+          .includes(communicationAddress.country.toLowerCase()),
+      );
+
+      if (filteredCountry.length === 0) {
+        setCommunicationCountryError("This is not a valid Country.");
+        console.log("This is not a valid input.");
+        setSearchCode({ showCodes: false });
+        setIsexistsCountry(false);
+        //setIsexistsIndustry(false);
+        // setSearchIndustry({ showLists: true });
+      } else {
+        setCommunicationCountryError("");
+        console.log("This is a valid input.");
+        console.log(searchCode.search);
+        setSearchCode({ showCodes: true });
+        //setIsexistsIndustry(true);
+        SetFilteredCountry(filteredCountry);
+        setIsexistsCountry(true);
+      }
+
+      SetFilteredCountry(filteredCountry);
+    } else {
+      SetFilteredCountry([]);
+      setCommunicationCountryError("");
+    }
+  }, [communicationAddress.country, countries]);
+
+  const [filteredStates, SetFilteredStates] = useState([]);
+  const [isExistsState, setIsexistsState] = useState(true);
+  useEffect(() => {
+    if (communicationAddress.state) {
+      const filteredStates = states.filter((state) =>
+        state.name
+          .toLowerCase()
+          .includes(communicationAddress.state.toLowerCase()),
+      );
+
+      if (filteredCountry.length === 0) {
+        setCommunicationStateError("This is not a valid State.");
+        console.log("This is not a valid input.");
+        setSearchCode({ showCodes: false });
+        setIsexistsState(false);
+        //setIsexistsIndustry(false);
+        // setSearchIndustry({ showLists: true });
+      } else {
+        setCommunicationStateError("");
+        console.log("This is a valid input.");
+        console.log(searchCode.search);
+        setSearchCode({ showCodes: true });
+        //setIsexistsIndustry(true);
+        SetFilteredStates(filteredStates);
+        setIsexistsState(true);
+      }
+
+      SetFilteredStates(filteredStates);
+    } else {
+      SetFilteredStates([]);
+      setCommunicationStateError("");
+    }
+  }, [communicationAddress.state, states]);
+
+  const [filteredCities, SetFilteredCities] = useState([]);
+  const [isExistsCity, setIsexistsCity] = useState(true);
+  useEffect(() => {
+    if (communicationAddress.city) {
+      const filteredCities = cities.filter((city) =>
+        city.name
+          .toLowerCase()
+          .includes(communicationAddress.city.toLowerCase()),
+      );
+
+      if (filteredCities.length === 0) {
+        setCommunicationCityError("This is not a valid City.");
+        console.log("This is not a valid input.");
+        setSearchCode({ showCodes: false });
+        setIsexistsCity(false);
+        //setIsexistsIndustry(false);
+        // setSearchIndustry({ showLists: true });
+      } else {
+        setCommunicationCityError("");
+        console.log("This is a valid input.");
+        console.log(searchCode.search);
+        setSearchCode({ showCodes: true });
+        //setIsexistsIndustry(true);
+        SetFilteredCities(filteredCities);
+        setIsexistsState(true);
+      }
+
+      SetFilteredCities(filteredCities);
+    } else {
+      SetFilteredCities([]);
+      setCommunicationCityError("");
+    }
+  }, [communicationAddress.city, cities]);
+
+  const [filteredBillCountry, SetFilteredBillCountry] = useState([]);
+  useEffect(() => {
+    if (billingAddress.country) {
+      const filteredBillCountry = countries.filter((country) =>
+        country.name
+          .toLowerCase()
+          .includes(billingAddress.country.toLowerCase()),
+      );
+
+      if (filteredCities.length === 0) {
+        setBillingCountryError("This is not a valid country.");
+        console.log("This is not a valid input.");
+        setSearchCode({ showCodes: false });
+        setIsexistsCity(false);
+        //setIsexistsIndustry(false);
+        // setSearchIndustry({ showLists: true });
+      } else {
+        setBillingCountryError("");
+        console.log("This is a valid input.");
+        console.log(searchCode.search);
+        setSearchCode({ showCodes: true });
+        //setIsexistsIndustry(true);
+        SetFilteredBillCountry(filteredBillCountry);
+      }
+
+      SetFilteredBillCountry(filteredBillCountry);
+    } else {
+      SetFilteredBillCountry([]);
+      setBillingCountryError("");
+    }
+  }, [billingAddress.country, countries]);
+
+  const [filteredBillStates, SetFilteredBillStates] = useState([]);
+  useEffect(() => {
+    if (billingAddress.state) {
+      const filteredBillStates = states.filter((state) =>
+        state.name.toLowerCase().includes(billingAddress.state.toLowerCase()),
+      );
+
+      if (filteredBillStates.length === 0) {
+        setBillingStateError("This is not a valid State.");
+        console.log("This is not a valid input.");
+        setSearchCode({ showCodes: false });
+        setIsexistsCity(false);
+        //setIsexistsIndustry(false);
+        // setSearchIndustry({ showLists: true });
+      } else {
+        setBillingStateError("");
+        console.log("This is a valid input.");
+        console.log(searchCode.search);
+        setSearchCode({ showCodes: true });
+        //setIsexistsIndustry(true);
+        SetFilteredBillStates(filteredBillStates);
+      }
+
+      SetFilteredBillStates(filteredBillStates);
+    } else {
+      SetFilteredBillStates([]);
+      setBillingStateError("");
+    }
+  }, [billingAddress.state, states]);
+
+  const [filteredBillCities, SetFilteredBillCities] = useState([]);
+  useEffect(() => {
+    if (billingAddress.city) {
+      const filteredBillCities = cities.filter((city) =>
+        city.name.toLowerCase().includes(billingAddress.city.toLowerCase()),
+      );
+
+      if (filteredBillCities.length === 0) {
+        setBillingStateError("This is not a valid State.");
+        console.log("This is not a valid input.");
+        setSearchCode({ showCodes: false });
+        setIsexistsCity(false);
+        //setIsexistsIndustry(false);
+        // setSearchIndustry({ showLists: true });
+      } else {
+        setBillingStateError("");
+        console.log("This is a valid input.");
+        console.log(searchCode.search);
+        setSearchCode({ showCodes: true });
+        //setIsexistsIndustry(true);
+        SetFilteredBillCities(filteredBillCities);
+      }
+
+      SetFilteredBillCities(filteredBillCities);
+    } else {
+      SetFilteredBillCities([]);
+      setBillingStateError("");
+    }
+  }, [billingAddress.city, cities]);
 
   const submitMemberData = async (e) => {
     e.preventDefault();
     setLoader(true);
     setGenderError("");
+    setCodeError("");
     setPhoneNumberError("");
     setCompanyNameError("");
     setIndustryError("");
@@ -368,6 +600,13 @@ function Index() {
       hasError = true;
       genderRef.current.focus();
     }
+    if (searchCode.search === "") {
+      setCodeError("Country code is required.");
+      hasError = true;
+      industryRef.current.focus();
+      setSearchCode({ showCodes: true });
+    }
+
     if (phoneNumber === "") {
       setPhoneNumberError("Phone Number is required.");
       hasError = true;
@@ -385,11 +624,13 @@ function Index() {
     if (searchIndustry.search === "") {
       setIndustryError("Industry is required.");
       hasError = true;
+      setIsexistsIndustry(false);
       industryRef.current.focus();
     }
     if (communicationAddress.addressLine1 === "") {
       setCommunicationAddress1Error("Address Line 1 is required.");
       hasError = true;
+      setIsExistsAddr1(false);
       communication1Ref.current.focus();
     }
     // if (communicationAddress.addressLine2 === "") {
@@ -400,21 +641,25 @@ function Index() {
     if (searchCountry.country === "") {
       setCommunicationCountryError("Country is required.");
       hasError = true;
+      setIsexistsCountry(false);
       communicationCountryRef.current.focus();
     }
     if (searchState.state === "") {
       setCommunicationStateError("State is required.");
       hasError = true;
+      setIsexistsState(false);
       communicationStateRef.current.focus();
     }
     if (searchCity.city === "") {
       setCommunicationCityError("City is required.");
       hasError = true;
+      setIsexistsCity(false);
       communicationCityRef.current.focus();
     }
     if (communicationAddress.postalCode === "") {
       setCommunicationPostalCodeError("Postal Code is required.");
       hasError = true;
+      setIsexistsPostalCode(false);
       communicationPostalCodeRef.current.focus();
     }
     if (billingAddress.addressLine1 === "") {
@@ -531,6 +776,7 @@ function Index() {
               required
               sizing="lg"
               //onBlur={() => setGenderError("")}
+              color={genderError && "failure"}
               ref={genderRef}
               onChange={(e) => setGender(e.target.value)}
             >
@@ -556,7 +802,9 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="Search Country"
-              className="w-1/2 text-[8px] placeholder:text-gray-500"
+              className="code w-1/2 text-[8px] placeholder:text-gray-500"
+              color={isExistsCountryCode === true ? "" : "failure"}
+              ref={codeRef}
               value={searchCode.search}
               onChange={(e) =>
                 setSearchCode({ search: e.target.value, showCodes: true })
@@ -590,16 +838,26 @@ function Index() {
               sizing="lg"
               placeholder="Mobile Number"
               value={phoneNumber}
+              color={phoneNumberError && "failure"}
               onChange={handlePhoneNumberChange}
               //onBlur={() => setPhoneNumberError("")}
               ref={phoneNumberRef}
-              className="-0 w-full rounded"
+              className="w-full rounded"
             />
           </div>
-          <div>
-            {phoneNumberError && (
-              <p className="p-2 text-start text-red-500">{phoneNumberError}</p>
-            )}
+          <div className="relative flex gap-2">
+            <div>
+              {codeError && (
+                <p className="p-2 text-start text-red-500">{codeError}</p>
+              )}
+            </div>
+            <div>
+              {phoneNumberError && (
+                <p className="p-2 text-start text-red-500">
+                  {phoneNumberError}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
@@ -613,6 +871,7 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="Company Name"
+              color={companyNameError && "failure"}
               ref={companyNameRef}
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
@@ -627,6 +886,7 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="Industry"
+              color={isExistsIndustry === false ? "failure" : ""}
               value={searchIndustry.search}
               onChange={(e) =>
                 setSearchIndustry({ search: e.target.value, showLists: true })
@@ -637,7 +897,7 @@ function Index() {
               <p className="p-2 text-start text-red-500">{industryError}</p>
             )}
             <div>
-              {searchIndustry.showLists && (
+              {filteredIndustries.length > 0 && searchIndustry.showLists && (
                 <ListGroup className="w-full">
                   {filteredIndustries.slice(0, 7).map((item) => (
                     <ListGroup.Item
@@ -686,6 +946,7 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="Address Line 1"
+              color={isExistsAddr1 === false ? "failure" : ""}
               value={communicationAddress.addressLine1}
               onChange={(e) =>
                 handleCommunicationAddressChange("addressLine1", e.target.value)
@@ -723,6 +984,7 @@ function Index() {
               sizing="lg"
               placeholder="Country"
               value={searchCountry.country}
+              color={isExistsCountry === true ? "" : "failure"}
               onChange={(e) => {
                 handleCommunicationAddressChange("country", e.target.value);
                 setSearchCountry({ showCountry: true });
@@ -759,9 +1021,10 @@ function Index() {
               id="small"
               type="text"
               sizing="lg"
-              className="code"
+              className=""
               placeholder="State"
               value={searchState.state}
+              color={isExistsState === true ? "" : "failure"}
               onChange={(e) => {
                 handleCommunicationAddressChange("state", e.target.value);
                 setSearchState({ showState: true });
@@ -800,6 +1063,7 @@ function Index() {
               sizing="lg"
               placeholder="City"
               value={searchCity.city}
+              color={communicationCityError && "failure"}
               onChange={(e) => {
                 handleCommunicationAddressChange("city", e.target.value);
                 setSearchCity({ showCity: true });
@@ -837,6 +1101,7 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="Postal Code"
+              color={isexistsPostalCode === true ? "" : "failure"}
               value={communicationAddress.postalCode}
               onChange={(e) =>
                 handleCommunicationAddressChange("postalCode", e.target.value)
@@ -877,6 +1142,7 @@ function Index() {
               sizing="lg"
               placeholder="Address Line 1"
               value={billingAddress.addressLine1}
+              color={billingAddress1Error && "failure"}
               onChange={(e) =>
                 setBillingAddress({
                   ...billingAddress,
@@ -919,6 +1185,7 @@ function Index() {
               sizing="lg"
               placeholder="Country"
               value={searchBillCountry.country}
+              color={billingCountryError && "failure"}
               onChange={(e) => {
                 setBillingAddress({
                   ...billingAddress,
@@ -959,6 +1226,7 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="State"
+              color={billingStateError && "failure"}
               // value={billingAddress.state}
               // onChange={(e) =>
               //   setBillingAddress({
@@ -1005,6 +1273,7 @@ function Index() {
               type="text"
               sizing="lg"
               placeholder="City"
+              color={billingCityError && "failure"}
               // value={billingAddress.city}
               // onChange={(e) =>
               //   setBillingAddress({
@@ -1052,6 +1321,7 @@ function Index() {
               sizing="lg"
               placeholder="Postal Code"
               value={billingAddress.postalCode}
+              color={billingPostalCodeError && "failure"}
               onChange={(e) =>
                 setBillingAddress({
                   ...billingAddress,

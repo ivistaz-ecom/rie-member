@@ -5,6 +5,7 @@ import { HiInformationCircle } from "react-icons/hi";
 import Loader from "../../components/Loader";
 import Banner from "../../components/Banner";
 import { useNavigate } from "react-router-dom";
+import OtpTimer from "../../components/OtpTimer/OtpTimer";
 
 function Index() {
   const [otp, setOtp] = useState("");
@@ -81,11 +82,13 @@ function Index() {
                   )}
                 />
               </div>
-              <div className="flex  items-center justify-center">
+              <div className="mx-auto flex w-4/5 place-content-center justify-between">
                 <Button type="submit" size="lg" onClick={verifyOtp}>
                   Verify OTP
                 </Button>
+                <OtpTimer />
               </div>
+              <div></div>
               <div className="flex  items-center justify-center">
                 {error.message && (
                   <Alert

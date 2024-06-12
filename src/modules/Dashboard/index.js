@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button } from "flowbite-react";
+import NoTransaction from "../../components/NoTransactions";
 
 import {
   angleDown,
@@ -32,11 +33,13 @@ const Dashboard = () => {
   });
   const isRegistered = storedParsedData[0].regstatus;
   const isMemberId = storedParsedData[0].id;
+  const gender = storedParsedData[0].gender;
 
   // const storedSessionData = sessionStorage.getItem('r_TokenMember_Session');
   // const storedSessionDataInfo = sessionStorage.getItem('r_TokenMember_Info');
   // const storedDataSessionId = sessionStorage.getItem('r_TokenId_Session');
   //console.log(storedDataInfo)
+  const [noTrans, setNoTrans] = useState(false);
 
   const getTransactionDetails = async () => {
     //console.log(state.memberId)
@@ -58,7 +61,7 @@ const Dashboard = () => {
       }
 
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
 
       const paymentInfo = data.paymentinfo.filter(
         (item) => item.eoid === isMemberId,
@@ -103,6 +106,8 @@ const Dashboard = () => {
         //return data
       } else {
         setLoader(false);
+        console.log("no payment history");
+        setNoTrans(true);
       }
     } catch (error) {
       console.error("Failed to fetch transaction details:", error);
@@ -163,6 +168,20 @@ const Dashboard = () => {
       }),
     );
 
+    sessionStorage.setItem(
+      "stepping",
+      JSON.stringify({
+        step1: 1,
+        step2: 2,
+        step3: 3,
+        step4: 4,
+        step5: 5,
+        step6: 6,
+        endCount1: 4,
+        endCount2: 6,
+      }),
+    );
+
     navigate("/slp-info");
   };
 
@@ -199,7 +218,19 @@ const Dashboard = () => {
     sessionStorage.removeItem("r_TokenMember_Slp");
     sessionStorage.removeItem("r_TokenMember_SlpPref");
 
+    sessionStorage.removeItem("r_transactions");
+    sessionStorage.removeItem("r_TokenMember_Pref_t");
+    sessionStorage.removeItem("r_TokenMember_SlpPref_t");
+
+    sessionStorage.removeItem("Form_submitted_t");
+    sessionStorage.removeItem("r_TokenMember_Slp_t");
+    sessionStorage.removeItem("r_TokenMember_Info_t");
+
     navigate("/");
+  };
+
+  const closeStatus = () => {
+    setNoTrans(!noTrans);
   };
 
   return (
@@ -211,7 +242,11 @@ const Dashboard = () => {
         >
           <div className="flex items-center gap-2">
             <div className="bg-custom-gradient flex items-center justify-center rounded-full">
-              <img src="/profile.png" alt="profile" className="size-8" />
+              {gender === "m" ? (
+                <img src="/male.png" alt="profile" className="size-8" />
+              ) : (
+                <img src="/female.png" alt="profile" className="size-8" />
+              )}
             </div>
             <h1 className="text-lg">
               {storedParsedData[0].firstname} {storedParsedData[0].lastname}
@@ -258,7 +293,11 @@ const Dashboard = () => {
           >
             <div className="flex items-center gap-2">
               <div className="bg-custom-gradient flex items-center justify-center rounded-full">
-                <img src="/profile.png" alt="profile" className="size-10" />
+                {gender === "m" ? (
+                  <img src="/male.png" alt="profile" className="size-8" />
+                ) : (
+                  <img src="/female.png" alt="profile" className="size-8" />
+                )}
               </div>
               <div>
                 <h1 className="text-lg">
@@ -313,6 +352,7 @@ const Dashboard = () => {
         </Card>
       </div>
       {loader && <Loader />}
+      <NoTransaction status={noTrans} onClick={closeStatus} />
     </div>
   );
 };
