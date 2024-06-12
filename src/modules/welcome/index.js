@@ -93,7 +93,7 @@ function Index() {
     <div className="flex h-screen flex-col items-center justify-center bg-[#210657]">
       <div className="mt-4 text-center">
         <h2 className="text-1xl font-semibold text-white lg:text-2xl">
-          Please choose the type of registration.
+          Please choose your registration type.
         </h2>
       </div>
       <div className="grid grid-cols-1 gap-4 place-self-center p-4 lg:grid-cols-2">
@@ -105,7 +105,7 @@ function Index() {
           <h5 className="text-center text-2xl font-bold tracking-tight dark:text-white">
             Member
           </h5>
-          <p>Registraion</p>
+          <p>Registration</p>
         </Card>
         <Card
           href="#"
@@ -116,7 +116,7 @@ function Index() {
           <h5 className="text-center text-2xl font-bold tracking-tight  dark:text-white">
             Member + SLP
           </h5>
-          <p className="">Registraions</p>
+          <p className="">Registration</p>
         </Card>
       </div>
     </div>
