@@ -10,6 +10,7 @@ import RazorPay from "./RazorPay";
 import SERVERCONFIG from "../../server.json";
 import Loader from "../../components/Loader";
 import Cookies from "js-cookie";
+import Stepper from "../../components/Stepper";
 // const currDate = newDate();
 
 // const paymentDetails = [
@@ -33,6 +34,13 @@ const PaymentGateway = () => {
   const parseMemberData = JSON.parse(memberData);
   const memberSLPData = sessionStorage.getItem("r_TokenMember_Slp");
   const parseMemberSLPData = JSON.parse(memberSLPData);
+
+  const memberTotal = sessionStorage.getItem("memberInfo");
+  const parseMemberTotal = JSON.parse(memberTotal);
+  const memberCount = parseMemberTotal.memberCount;
+
+  const stepping = sessionStorage.getItem("stepping");
+  const steps = JSON.parse(stepping);
 
   const today = new Date();
   const formattedDate = today.toISOString().split("T")[0];
@@ -67,7 +75,7 @@ const PaymentGateway = () => {
   const region = parseMemberInfo[0].region;
 
   const symbol = parseMemberInfo[0].region === "SA" ? "₹" : "$";
-  const voucher = parseMemberInfo[0].voucher_amt;
+  const voucher = parseInt(parseMemberInfo[0].voucher_amt);
   const expdate = parseMemberInfo[0].exprdt;
   const spouseid = parseMemberSLPData ? parseMemberSLPData.slp.id : "0";
   const status = "false";
@@ -179,6 +187,10 @@ const PaymentGateway = () => {
 
   return (
     <div className="poppins-light flex min-h-screen flex-col items-center justify-center bg-[#F9F6FF] pt-6 ">
+      {/* <Stepper
+        steps={memberCount > 1 ? steps.endCount2 : steps.endCount1}
+        total={memberCount > 1 ? steps.endCount2 : steps.endCount1}
+      /> */}
       {parseMemberInfo[0].voucher_amt > 0 && isExpired === false && (
         <h1 className="mb-5 text-2xl font-bold text-[#3F3D56]">Voucher</h1>
       )}

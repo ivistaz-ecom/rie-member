@@ -4,6 +4,7 @@ import { GoPerson } from "react-icons/go";
 import { GoPersonAdd } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import SERVERCONFIG from "../../server.json";
+import Stepper from "../../components/Stepper";
 
 function Index() {
   const navigate = useNavigate();
@@ -38,6 +39,19 @@ function Index() {
         payableAmount: newMemberInfo.payableAmount,
       }),
     );
+    sessionStorage.setItem(
+      "stepping",
+      JSON.stringify({
+        step1: 1,
+        step2: 2,
+        step3: 3,
+        step4: 4,
+        step5: 5,
+        step6: 6,
+        endCount1: 4,
+        endCount2: 6,
+      }),
+    );
     navigate("/member-registration");
   };
 
@@ -59,12 +73,25 @@ function Index() {
         payableAmount: newMemberInfo.payableAmount,
       }),
     );
+    sessionStorage.setItem(
+      "stepping",
+      JSON.stringify({
+        step1: 1,
+        step2: 2,
+        step3: 3,
+        step4: 4,
+        step5: 5,
+        step6: 6,
+        endCount1: 4,
+        endCount2: 6,
+      }),
+    );
     navigate("/member-registration");
   };
 
   return (
     <div className="flex h-screen flex-col items-center justify-center bg-[#210657]">
-      <div className="text-center">
+      <div className="mt-4 text-center">
         <h2 className="text-1xl font-semibold text-white lg:text-2xl">
           Please choose the type of registration.
         </h2>

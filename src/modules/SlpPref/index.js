@@ -12,6 +12,7 @@ import { interesting, colourOptions } from "../../utils/data";
 import SERVERCONFIG from "../../server.json";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import Stepper from "../../components/Stepper";
 
 function Index() {
   const navigate = useNavigate();
@@ -31,6 +32,10 @@ function Index() {
   const memberTotal = sessionStorage.getItem("memberInfo");
   const parseMemberTotal = JSON.parse(memberTotal);
   const memberCount = memberTotal ? parseMemberTotal.memberCount : "";
+
+  const stepping = sessionStorage.getItem("stepping");
+  const steps = JSON.parse(stepping);
+
   const [gender, setGender] = useState();
   const [memberPref, setMemberPref] = useState({
     loading: false,
@@ -41,7 +46,7 @@ function Index() {
     interests: [],
     specialrequest: "",
   });
-  
+
   useEffect(() => {
     if (slpInfo) {
       const slpInforData = JSON.parse(slpInfo);
@@ -266,6 +271,11 @@ function Index() {
 
   return (
     <div className="flex flex-col items-center justify-center bg-[#210657]">
+      <Stepper
+        steps={steps.step5}
+        type="Member Information"
+        total={memberCount > 1 ? steps.endCount2 : steps.endCount1}
+      />
       <div className="w-full p-4 text-center lg:w-1/3">
         <h2 className="pb-10 text-xl font-semibold text-white lg:text-2xl">
           SLP Preferences

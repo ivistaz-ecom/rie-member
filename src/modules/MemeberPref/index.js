@@ -13,6 +13,7 @@ import { interesting } from "../../utils/data";
 import SERVERCONFIG from "../../server.json";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import Stepper from "../../components/Stepper";
 
 function Index() {
   const navigate = useNavigate();
@@ -31,6 +32,9 @@ function Index() {
   const memberTotal = sessionStorage.getItem("memberInfo");
   const parseMemberTotal = JSON.parse(memberTotal);
   const memberCount = parseMemberTotal.memberCount;
+
+  const stepping = sessionStorage.getItem("stepping");
+  const steps = JSON.parse(stepping);
 
   const [interestValue, setInterestValue] = useState({
     search: "",
@@ -244,6 +248,10 @@ function Index() {
 
   return (
     <div className="flex flex-col items-center justify-center bg-[#210657]">
+      <Stepper
+        steps={steps.step2}
+        total={memberCount > 1 ? steps.endCount2 : steps.endCount1}
+      />
       <div className="w-full p-4 text-center lg:w-1/3">
         <h2 className="pb-10 text-xl font-semibold text-white lg:text-2xl">
           Member Preferences

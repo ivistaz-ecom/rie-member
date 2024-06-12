@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { Country, State, City } from "country-state-city";
+import Stepper from "../../components/Stepper";
 
 function Index() {
   const navigate = useNavigate();
@@ -26,8 +27,13 @@ function Index() {
   const memberSavedInfo = sessionStorage.getItem("r_TokenMember_Info");
   const parseMemSavedInfo = JSON.parse(memberSavedInfo);
   const memberWelcomeInfo = sessionStorage.getItem("memberInfo");
+  const parserMemberInfo = JSON.parse(memberWelcomeInfo);
+  const memberCount = parserMemberInfo.memberCount;
   const memberContact = sessionStorage.getItem("r_TokenMember_Contact");
   const parserMemberContact = JSON.parse(memberContact);
+
+  const stepping = sessionStorage.getItem("stepping");
+  const steps = JSON.parse(stepping);
 
   const [loader, setLoader] = useState(false);
   const [copyAddress, setCopyAddress] = useState(false);
@@ -494,6 +500,7 @@ function Index() {
           "r_TokenMember_Contact",
           JSON.stringify(MemberPhoneNumber),
         );
+
         //navigate(isSLP ? '/slp-info' : '/member-preferences')
         navigate("/member-preferences");
         setLoader(false);
@@ -509,6 +516,10 @@ function Index() {
 
   return (
     <div className="flex flex-col items-center justify-center bg-[#210657]">
+      <Stepper
+        steps={steps.step1}
+        total={memberCount > 1 ? steps.endCount2 : steps.endCount1}
+      />
       <div className="w-full p-4 text-center lg:w-1/3">
         <h2 className="pb-10 text-xl font-semibold text-white lg:text-2xl">
           Member Information

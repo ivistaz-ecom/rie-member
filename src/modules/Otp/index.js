@@ -101,7 +101,7 @@ function Index() {
           </div>
         </div>
 
-        <Banner />
+        {/* <Banner /> */}
       </div>
     </div>
   );

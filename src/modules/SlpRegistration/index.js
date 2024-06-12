@@ -13,6 +13,7 @@ import { memberIndustries, countryList } from "../../utils/data";
 import Loader from "../../components/Loader";
 import SERVERCONFIG from "../../server.json";
 import Cookies from "js-cookie";
+import Stepper from "../../components/Stepper";
 
 function Index() {
   const navigate = useNavigate();
@@ -23,6 +24,13 @@ function Index() {
   const parserMemberContact = JSON.parse(memberContact);
   const memberInfo = sessionStorage.getItem("r_TokenMember_Session");
   const parseMemInfo = JSON.parse(memberInfo);
+
+  const memberWelcomeInfo = sessionStorage.getItem("memberInfo");
+  const parserMemberInfo = JSON.parse(memberWelcomeInfo);
+  const memberCount = parserMemberInfo.memberCount;
+
+  const stepping = sessionStorage.getItem("stepping");
+  const steps = JSON.parse(stepping);
 
   const [copyAddress, setCopyAddress] = useState(false);
   const [copyCompany, setCompany] = useState(false);
@@ -487,6 +495,10 @@ function Index() {
 
   return (
     <div className="flex flex-col items-center justify-center bg-[#210657]">
+      <Stepper
+        steps={memberCount > 1 ? steps.step4 : steps.step1}
+        total={memberCount > 1 ? steps.endCount2 : steps.endCount1}
+      />
       <div className="w-full p-4 text-center lg:w-1/3">
         <h2 className="pb-10 text-xl font-semibold text-white lg:text-2xl">
           SLP Information
