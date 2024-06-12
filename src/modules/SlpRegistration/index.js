@@ -205,21 +205,25 @@ function Index() {
     if (!copyAddress) {
       // If toggle switch is turned on, copy communication address to billing address
       setSearchCountry({
-        country: memberSavedInfo ? parseMemSavedInfo.riemembers.country : "",
+        country: memberSavedInfo ? parseMemSavedInfo.riemembers.comcountry : "",
       });
       setSearchCity({
-        city: memberSavedInfo ? parseMemSavedInfo.riemembers.city : "",
+        city: memberSavedInfo ? parseMemSavedInfo.riemembers.comcity : "",
       });
       setSearchState({
-        state: memberSavedInfo ? parseMemSavedInfo.riemembers.state : "",
+        state: memberSavedInfo ? parseMemSavedInfo.riemembers.comstate : "",
       });
       setCommunicationAddress({
-        addressLine1: memberSavedInfo ? parseMemSavedInfo.riemembers.addr1 : "",
-        addressLine2: memberSavedInfo ? parseMemSavedInfo.riemembers.addr2 : "",
+        addressLine1: memberSavedInfo
+          ? parseMemSavedInfo.riemembers.comaddr1
+          : "",
+        addressLine2: memberSavedInfo
+          ? parseMemSavedInfo.riemembers.comaddr2
+          : "",
         country: "",
-        state: memberSavedInfo ? parseMemSavedInfo.riemembers.state : "",
-        city: memberSavedInfo ? parseMemSavedInfo.riemembers.city : "",
-        postalCode: memberSavedInfo ? parseMemSavedInfo.riemembers.pin : "",
+        state: memberSavedInfo ? parseMemSavedInfo.riemembers.comstate : "",
+        city: memberSavedInfo ? parseMemSavedInfo.riemembers.comcity : "",
+        postalCode: memberSavedInfo ? parseMemSavedInfo.riemembers.compin : "",
       });
     } else {
       // If toggle switch is turned off, clear billing address fields
