@@ -13,7 +13,7 @@ import SERVERCONFIG from "../../server.json";
 import Loader from "../../components/Loader";
 
 const DataList = () => {
-  const data = sessionStorage.getItem("Form_submitted");
+  const data = sessionStorage.getItem("Form_submitted_t");
   const parseData = JSON.parse(data);
   const memberData = sessionStorage.getItem("r_TokenMember_Info");
   const parseMemberData = JSON.parse(memberData);

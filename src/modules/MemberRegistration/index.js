@@ -759,6 +759,7 @@ function Index() {
               id="small"
               type="text"
               sizing="lg"
+              className="code"
               placeholder="State"
               value={searchState.state}
               onChange={(e) => {
