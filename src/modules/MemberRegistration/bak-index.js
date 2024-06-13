@@ -1375,6 +1375,46 @@ function Index() {
         <div></div>
       </div>
       {loader && <Loader />}
+      <div>
+        <section className="grid min-h-screen place-items-center bg-gradient-to-r from-teal-400 to-teal-500 px-3 pb-20 selection:bg-teal-500 selection:text-white">
+          <div>
+            <h2 className="text-2xl font-bold text-teal-900">
+              Country, State and City Selectors
+            </h2>
+            <br />
+            <div className="flex flex-wrap gap-3 rounded-lg bg-teal-300 p-8">
+              <div>
+                <p className="font-semibold text-teal-800">Country :</p>
+                <Selector
+                  data={countryData}
+                  selected={country}
+                  setSelected={setCountry}
+                />
+              </div>
+              {state && (
+                <div>
+                  <p className="font-semibold text-teal-800">State :</p>
+                  <Selector
+                    data={stateData}
+                    selected={state}
+                    setSelected={setState}
+                  />
+                </div>
+              )}
+              {city && (
+                <div>
+                  <p className="font-semibold text-teal-800">City :</p>
+                  <Selector
+                    data={cityData}
+                    selected={city}
+                    setSelected={setCity}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

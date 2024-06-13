@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./modules/Home";
 import Otp from "./modules/Otp/";
 import Welcome from "./modules/welcome";
-import MemberRegistration from "./modules/MemberRegistration";
+import MemberRegistration from "./modules/MemberRegistrations";
 import MemberPref from "./modules/MemeberPref";
 import PaymentGateway from "./modules/PaymentGateway";
 import SlpRegistration from "./modules/SlpRegistration";
