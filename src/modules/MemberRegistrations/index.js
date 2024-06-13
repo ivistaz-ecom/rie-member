@@ -552,7 +552,11 @@ function Index() {
         JSON.parse(sessionStorage.getItem("commCountry")) ||
           countryComData[100],
       );
-      setComState(JSON.parse(sessionStorage.getItem("commState")));
+      if (stateComData) {
+        setComState(
+          JSON.parse(sessionStorage.getItem("commState")) || stateComData[0],
+        );
+      }
       if (cityComData) {
         setComCity(
           JSON.parse(sessionStorage.getItem("commCity")) || cityComData[0],
@@ -563,7 +567,7 @@ function Index() {
       // Example:
       // setComState(previousState => previousState || someDefaultValue);
     }
-  }, [copyAddress, stateComData]);
+  }, [copyAddress, stateComData, cityComData, countryComData]);
 
   // useEffect(() => {
   //   if (copyAddress) {
