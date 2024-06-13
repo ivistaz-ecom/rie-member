@@ -19,7 +19,7 @@ function Selector({ countryList, selectedList, setSelectedList }) {
         );
 
   return (
-    <div className="w-1/1 z-50 py-0">
+    <div className="z-50 w-1/3 py-0">
       <Combobox value={selectedList} onChange={setSelectedList}>
         <div className="relative mt-0">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white py-3 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">

@@ -219,10 +219,10 @@ function Index() {
       setComCity(JSON.parse(sessionStorage.getItem("billingCity")));
     } else {
       // If toggle switch is turned off, clear billing address fields
-      setComCountry(JSON.parse(sessionStorage.getItem("commCountry")));
-      setComState(JSON.parse(sessionStorage.getItem("commState")));
-      //console.log(JSON.parse(sessionStorage.getItem("commState")));
-      setComCity(JSON.parse(sessionStorage.getItem("commCity")));
+      // setComCountry(JSON.parse(sessionStorage.getItem("commCountry")));
+      // setComState(JSON.parse(sessionStorage.getItem("commState")));
+      // //console.log(JSON.parse(sessionStorage.getItem("commState")));
+      // setComCity(JSON.parse(sessionStorage.getItem("commCity")));
       setBillingAddress({
         addressLine1: parseMemSavedInfo
           ? parseMemSavedInfo.riemembers.comaddr1
@@ -408,6 +408,7 @@ function Index() {
     sessionStorage.setItem("billingCountry", JSON.stringify(country));
     sessionStorage.setItem("billingState", JSON.stringify(state));
     sessionStorage.setItem("billingCity", JSON.stringify(city));
+    sessionStorage.setItem("industry", JSON.stringify(selected));
 
     sessionStorage.setItem("commCountry", JSON.stringify(comCountry));
     sessionStorage.setItem("commState", JSON.stringify(comState));
@@ -490,9 +491,7 @@ function Index() {
 
   const [stateComData, setStateComData] = useState();
   const [cityComData, setCityComData] = useState();
-  const [comCountry, setComCountry] = useState(
-    JSON.parse(sessionStorage.getItem("commCountry")) || countryComData[100],
-  );
+  const [comCountry, setComCountry] = useState(countryComData[100]);
   const [comState, setComState] = useState();
   const [comCity, setComCity] = useState();
 
@@ -510,36 +509,35 @@ function Index() {
     }
   }, [comState]);
 
-  useEffect(() => {
-    if (stateData) {
-      setState(
-        JSON.parse(sessionStorage.getItem("billingState")) || stateData[0],
-      );
-    }
-  }, [stateData]);
+  // useEffect(() => {
+  //   if (stateData) {
+  //     if (state) {
+  //       setState(stateData[0]);
+  //     } else {
+  //       setState(JSON.parse(sessionStorage.getItem("billingState")));
+  //     }
+  //   }
+  // }, [stateData]);
 
-  useEffect(() => {
-    if (cityData) {
-      setCity(JSON.parse(sessionStorage.getItem("billingCity")) || cityData[0]);
-    }
-  }, [cityData]);
+  // useEffect(() => {
+  //   if (cityData) {
+  //     setCity(JSON.parse(sessionStorage.getItem("billingCity")) || cityData[0]);
+  //   }
+  // }, [cityData]);
 
   useEffect(() => {
     setStateData(State.getStatesOfCountry(country ? country.isoCode : ""));
-  }, [country]);
-
-  useEffect(() => {
     if (state) {
       setCityData(City.getCitiesOfState(country?.isoCode, state?.isoCode));
     }
-  }, [state]);
+  }, [country, state]);
 
   // copy stared here
 
   useEffect(() => {
     if (copyAddress) {
-      console.log("hello");
-      console.log(state);
+      // console.log("hello");
+      // console.log(state);
       setComCountry(country || countryComData[100]);
       if (stateComData) {
         setComState(state || stateData[0]);
@@ -548,24 +546,52 @@ function Index() {
         setComCity(city || cityComData[0]);
       }
     } else {
-      setComCountry(
-        JSON.parse(sessionStorage.getItem("commCountry")) ||
-          countryComData[100],
-      );
-      if (stateComData) {
-        setComState(
-          JSON.parse(sessionStorage.getItem("commState")) || stateComData[0],
-        );
+      if (comCountry) {
+        setComCountry(comCountry);
+      } else {
+        setComCountry(JSON.parse(sessionStorage.getItem("commCountry")));
       }
-      if (cityComData) {
-        setComCity(
-          JSON.parse(sessionStorage.getItem("commCity")) || cityComData[0],
-        );
+      if (comState) {
+        setComState(comState);
+      } else {
+        setComState(JSON.parse(sessionStorage.getItem("commState")));
+      }
+      if (comCity) {
+        setComCity(comCity);
+      } else {
+        setComCity(JSON.parse(sessionStorage.getItem("commCity")));
       }
 
-      // Here you might set the comState to the previous state or whatever default value you want
-      // Example:
-      // setComState(previousState => previousState || someDefaultValue);
+      if (country) {
+        setCountry(country);
+      } else {
+        setCountry(JSON.parse(sessionStorage.getItem("billingCountry")));
+      }
+      if (state) {
+        setState(state);
+      } else {
+        setState(JSON.parse(sessionStorage.getItem("billingState")));
+      }
+      if (city) {
+        setCity(city);
+      } else {
+        setCity(JSON.parse(sessionStorage.getItem("billingCity")));
+      }
+      // if (
+      //   JSON.parse(sessionStorage.getItem("billingCountry")) ||
+      //   JSON.parse(sessionStorage.getItem("billingState")) ||
+      //   JSON.parse(sessionStorage.getItem("billingCity"))
+      // ) {
+      //   if (comCountry || comState || comCity) {
+      //     setComCountry(comCountry);
+      //     setComState(comState);
+      //     setComCity(comCity);
+      //   } else {
+      //     setComCountry(JSON.parse(sessionStorage.getItem("commCountry")));
+      //     setComState(JSON.parse(sessionStorage.getItem("commState")));
+      //     setComCity(JSON.parse(sessionStorage.getItem("commCity")));
+      //   }
+      // }
     }
   }, [copyAddress, stateComData, cityComData, countryComData]);
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 
@@ -6,6 +7,7 @@ function Index({ steps, type, total }) {
 
   const handleClick = (value) => {
     console.log(value);
+    // Navigation logic based on step value
     switch (value) {
       case 1:
         navigate("/welcome");
@@ -39,7 +41,9 @@ function Index({ steps, type, total }) {
               index === total - 1 && index >= steps
                 ? ""
                 : "w-full after:absolute after:left-4 after:top-3 after:inline-block after:h-0.5 after:w-full"
-            } ${index < steps ? "after:bg-green-600" : "after:bg-slate-100"} after:content-[''] lg:after:top-5`}
+            } ${
+              index < steps ? "after:bg-green-600" : "after:bg-slate-100"
+            } after:content-[''] lg:after:top-5`}
           >
             <div
               className="z-10 block whitespace-nowrap"
