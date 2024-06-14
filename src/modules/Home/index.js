@@ -14,6 +14,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
 import Whatsapp from "../../components/Whatsapp";
+import LazyLoad from "react-lazyload";
 
 function Index() {
   const navigate = useNavigate();
@@ -196,7 +197,9 @@ function Index() {
       <div className="w-full lg:w-1/3">
         {formData.loading && <Loader />}
         <div className="mb-7 flex justify-center">
-          <img src="/logo.svg" className="w-1/2" />
+          <LazyLoad height={200} offset={100}>
+            <img src="/logo.svg" className="w-1/2" alt="Logo" />
+          </LazyLoad>
         </div>
         <div className="relative text-center">
           <h2 className="text-3xl text-white">WELCOME TO</h2>
