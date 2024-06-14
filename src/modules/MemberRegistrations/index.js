@@ -258,11 +258,17 @@ function Index() {
       setPhoneNumberError("Phone Number must be at least 10 digits.");
       hasError = true;
       phoneNumberRef.current.focus();
+    } else {
+      setPhoneNumberError("");
+      hasError = false;
     }
     if (companyName === "") {
       setCompanyNameError("Company Name is required.");
       hasError = true;
       companyNameRef.current.focus();
+    } else {
+      setCompanyNameError("");
+      hasError = false;
     }
     if (selected === null) {
       setIndustryError("Industry is required.");
@@ -271,6 +277,7 @@ function Index() {
       //industryRef.current.focus();
     } else {
       setIndustryError("");
+      hasError = false;
     }
 
     if (city === null) {
@@ -280,6 +287,7 @@ function Index() {
       //industryRef.current.focus();
     } else {
       setCityError("");
+      hasError = false;
     }
     console.log(comCountry);
     if (comCountry === null) {
@@ -289,6 +297,7 @@ function Index() {
       //industryRef.current.focus();
     } else {
       setComCountryError("");
+      hasError = false;
     }
     if (comState === null) {
       setComStateError("State is required.");
@@ -297,6 +306,7 @@ function Index() {
       //industryRef.current.focus();
     } else {
       setComStateError("");
+      hasError = false;
     }
 
     if (comCity === null) {
@@ -306,6 +316,7 @@ function Index() {
       //industryRef.current.focus();
     } else {
       setComCityError("");
+      hasError = false;
     }
 
     //country.name
@@ -338,6 +349,7 @@ function Index() {
       //billingPostalCodeRef.current.focus();
     } else {
       setCountryError("");
+      hasError = false;
     }
 
     if (hasError) {
