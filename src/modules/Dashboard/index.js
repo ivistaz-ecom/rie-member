@@ -243,9 +243,25 @@ const Dashboard = () => {
           <div className="flex items-center gap-2">
             <div className="bg-custom-gradient flex items-center justify-center rounded-full">
               {gender === "m" ? (
-                <img src="/male.png" alt="profile" className="size-8" />
+                <img
+                  src="/male.png"
+                  alt={
+                    storedParsedData[0].firstname +
+                    "" +
+                    storedParsedData[0].lastname
+                  }
+                  className="size-8"
+                />
               ) : (
-                <img src="/female.png" alt="profile" className="size-8" />
+                <img
+                  src="/female.png"
+                  alt={
+                    storedParsedData[0].firstname +
+                    "" +
+                    storedParsedData[0].lastname
+                  }
+                  className="size-8"
+                />
               )}
             </div>
             <h1 className="text-lg">

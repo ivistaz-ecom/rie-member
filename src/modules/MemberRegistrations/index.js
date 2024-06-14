@@ -367,23 +367,26 @@ function Index() {
       communication1Ref.current.focus();
     }
 
-    if (communicationAddress.postalCode === "") {
-      setCommunicationPostalCodeError("Postal Code is required.");
-      hasError = true;
-      setIsexistsPostalCode(false);
-      communicationPostalCodeRef.current.focus();
-    }
+    // if (communicationAddress.postalCode === "") {
+    //   setCommunicationPostalCodeError("Postal Code is required.");
+    //   hasError = true;
+    //   setIsexistsPostalCode(false);
+    //   communicationPostalCodeRef.current.focus();
+    // }
     if (billingAddress.addressLine1 === "") {
       setBillingAddress1Error("Address Line 1 is required.");
       hasError = true;
       billing1Ref.current.focus();
+    } else {
+      setBillingAddress1Error("");
+      hasError = false;
     }
 
-    if (billingAddress.postalCode === "") {
-      setBillingPostalCodeError("Postal Code is required.");
-      hasError = true;
-      billingPostalCodeRef.current.focus();
-    }
+    // if (billingAddress.postalCode === "") {
+    //   setBillingPostalCodeError("Postal Code is required.");
+    //   hasError = true;
+    //   billingPostalCodeRef.current.focus();
+    // }
 
     if (hasError) {
       setLoader(false);
@@ -549,17 +552,29 @@ function Index() {
       if (comCountry) {
         setComCountry(comCountry);
       } else {
-        setComCountry(JSON.parse(sessionStorage.getItem("commCountry")));
+        if (countryData) {
+          setCountry(country);
+        } else {
+          setComCountry(JSON.parse(sessionStorage.getItem("commCountry")));
+        }
       }
       if (comState) {
         setComState(comState);
       } else {
-        setComState(JSON.parse(sessionStorage.getItem("commState")));
+        if (stateComData) {
+          setComState(stateComData[0]);
+        } else {
+          setComState(JSON.parse(sessionStorage.getItem("commState")));
+        }
       }
       if (comCity) {
         setComCity(comCity);
       } else {
-        setComCity(JSON.parse(sessionStorage.getItem("commCity")));
+        if (cityComData) {
+          setComCity(cityComData[0]);
+        } else {
+          setComCity(JSON.parse(sessionStorage.getItem("commCity")));
+        }
       }
 
       if (country) {
@@ -570,12 +585,20 @@ function Index() {
       if (state) {
         setState(state);
       } else {
-        setState(JSON.parse(sessionStorage.getItem("billingState")));
+        if (stateData) {
+          setState(stateData[0]);
+        } else {
+          setState(JSON.parse(sessionStorage.getItem("billingState")));
+        }
       }
       if (city) {
         setCity(city);
       } else {
-        setCity(JSON.parse(sessionStorage.getItem("billingCity")));
+        if (cityData) {
+          setCity(cityData[1]);
+        } else {
+          setCity(JSON.parse(sessionStorage.getItem("billingCity")));
+        }
       }
       // if (
       //   JSON.parse(sessionStorage.getItem("billingCountry")) ||
@@ -593,7 +616,15 @@ function Index() {
       //   }
       // }
     }
-  }, [copyAddress, stateComData, cityComData, countryComData]);
+  }, [
+    copyAddress,
+    stateComData,
+    cityComData,
+    countryComData,
+    cityData,
+    stateData,
+    countryData,
+  ]);
 
   // useEffect(() => {
   //   if (copyAddress) {
@@ -625,6 +656,7 @@ function Index() {
           Member Information
         </h2>
         <div className="flex flex-col gap-4">
+          <p className="-mb-4 text-start text-white">Select Gender</p>
           <div>
             <Select
               id="countries"
@@ -651,7 +683,7 @@ function Index() {
               <p className="p-2 text-start text-red-500">{genderError}</p>
             )}
           </div>
-
+          <p className="-mb-4 text-start text-white">Phone Number</p>
           <div className="relative flex gap-2">
             <Code
               countryList={countryList}
@@ -691,6 +723,7 @@ function Index() {
           Business Details
         </h2>
         <div className="flex flex-col gap-4">
+          <p className="-mb-4 text-start text-white">Company Name</p>
           <div>
             <TextInput
               id="small"
@@ -732,6 +765,7 @@ function Index() {
               </ListGroup>
             )} */}
           </div>
+          <p className="-mb-4 text-start text-white">GST # if Applicable</p>
           <div>
             <TextInput
               id="small"
@@ -756,6 +790,7 @@ function Index() {
           Billing Address
         </h2>
         <div className="flex flex-col gap-4">
+          <p className="-mb-4 text-start text-white">Address Line 1</p>
           <div>
             <TextInput
               id="small"
@@ -775,6 +810,7 @@ function Index() {
               </p>
             )}
           </div>
+          <p className="-mb-4 text-start text-white">Address Line 2</p>
           <div>
             <TextInput
               id="small"
@@ -794,6 +830,7 @@ function Index() {
             )} */}
           </div>
           <div>
+            <p className="-mb-4 text-start text-white">Country</p>
             <div>
               <Autocomplete
                 data={countryData}
@@ -802,25 +839,31 @@ function Index() {
               />
             </div>
             {stateData && stateData.length > 0 && (
-              <div>
-                <Autocomplete
-                  data={stateData}
-                  selected={state}
-                  setSelected={setState}
-                />
-              </div>
+              <>
+                <p className="-mb-4 text-start text-white">State</p>
+                <div>
+                  <Autocomplete
+                    data={stateData}
+                    selected={state}
+                    setSelected={setState}
+                  />
+                </div>
+              </>
             )}
             {cityData && cityData.length > 0 && (
-              <div>
-                <Autocomplete
-                  data={cityData}
-                  selected={city}
-                  setSelected={setCity}
-                />
-              </div>
+              <>
+                <p className="-mb-4 text-start text-white">City</p>
+                <div>
+                  <Autocomplete
+                    data={cityData}
+                    selected={city}
+                    setSelected={setCity}
+                  />
+                </div>
+              </>
             )}
           </div>
-
+          <p className="-mb-4 text-start text-white">Postal Code</p>
           <div>
             <TextInput
               id="small"
@@ -844,6 +887,7 @@ function Index() {
         <h2 className="py-4 text-start text-xl font-semibold text-white">
           Communication Address
         </h2>
+
         <div className="-pt-4 flex max-w-md flex-col gap-4 pb-6">
           <label className="inline-flex cursor-pointer items-center">
             <input
@@ -861,6 +905,7 @@ function Index() {
         </div>
 
         <div className="flex flex-col gap-4">
+          <p className="-mb-4 text-start text-white">Address Line 1</p>
           <div>
             <TextInput
               id="small"
@@ -883,6 +928,7 @@ function Index() {
               </p>
             )}
           </div>
+          <p className="-mb-4 text-start text-white">Address Line 2</p>
           <div>
             <TextInput
               id="small"
@@ -906,6 +952,7 @@ function Index() {
           </div>
           <div>
             {/* second part  */}
+            <p className="-mb-4 text-start text-white">Country</p>
             <div>
               <Autocomplete
                 data={countryComData}
@@ -914,24 +961,31 @@ function Index() {
               />
             </div>
             {stateComData && stateComData.length > 0 && (
-              <div>
-                <Autocomplete
-                  data={stateComData}
-                  selected={comState}
-                  setSelected={setComState}
-                />
-              </div>
+              <>
+                <p className="-mb-4 text-start text-white">State</p>
+                <div>
+                  <Autocomplete
+                    data={stateComData}
+                    selected={comState}
+                    setSelected={setComState}
+                  />
+                </div>
+              </>
             )}
             {cityComData && (
-              <div>
-                <Autocomplete
-                  data={cityComData}
-                  selected={comCity}
-                  setSelected={setComCity}
-                />
-              </div>
+              <>
+                <p className="-mb-4 text-start text-white">City</p>
+                <div>
+                  <Autocomplete
+                    data={cityComData}
+                    selected={comCity}
+                    setSelected={setComCity}
+                  />
+                </div>
+              </>
             )}
           </div>
+          <p className="-mb-4 text-start text-white">Postal Code</p>
           <div>
             <TextInput
               id="small"

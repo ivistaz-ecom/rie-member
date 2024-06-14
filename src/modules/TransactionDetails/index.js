@@ -13,6 +13,11 @@ import SERVERCONFIG from "../../server.json";
 import Loader from "../../components/Loader";
 
 const DataList = () => {
+  const storedData = sessionStorage.getItem("r_TokenMember_Session");
+  const storedParsedData = JSON.parse(storedData);
+  const gender = storedParsedData[0].gender;
+  const memberName =
+    storedParsedData[0].firstname + " " + storedParsedData[0].lastname;
   const data = sessionStorage.getItem("Form_submitted_t");
   const parseData = JSON.parse(data);
   const memberData = sessionStorage.getItem("r_TokenMember_Info");
@@ -45,11 +50,19 @@ const DataList = () => {
               >
                 <div className="flex items-center space-x-4 p-3 rtl:space-x-reverse">
                   <div className="shrink-0">
-                    <img
-                      className="size-8 rounded-full"
-                      src="/profile.png"
-                      alt="Neil image"
-                    />
+                    {gender === "m" ? (
+                      <img
+                        src="/male.png"
+                        alt={memberName}
+                        className="size-8 rounded-full"
+                      />
+                    ) : (
+                      <img
+                        src="/female.png"
+                        alt={memberName}
+                        className="size-8 rounded-full"
+                      />
+                    )}
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium text-gray-900 dark:text-white">

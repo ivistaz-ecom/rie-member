@@ -345,13 +345,13 @@ function Index() {
     // } else {
     //   setCommunicationCityError();
     // }
-    if (communicationAddress.postalCode === "") {
-      setCommunicationPostalCodeError("Postal Code is required.");
-      hasError = true;
-      communicationPostalCodeRef.current.focus();
-    } else {
-      setCommunicationPostalCodeError();
-    }
+    // if (communicationAddress.postalCode === "") {
+    //   setCommunicationPostalCodeError("Postal Code is required.");
+    //   hasError = true;
+    //   communicationPostalCodeRef.current.focus();
+    // } else {
+    //   setCommunicationPostalCodeError();
+    // }
     if (hasError) {
       setLoader(false);
       return;
@@ -361,7 +361,7 @@ function Index() {
       lastname: lastName,
       gender: gender,
       email: emailAddress,
-      mobile: phoneNumber,
+      mobile: selectedList.dial_code + phoneNumber,
       industry: "",
       company: companyName,
       gstno: gstNumber,
@@ -376,7 +376,7 @@ function Index() {
     };
     const MemberPhoneNumber = {
       mobile: phoneNumber,
-      code: "",
+      code: selectedList.dial_code,
     };
     console.log(formatedData);
 
@@ -470,7 +470,7 @@ function Index() {
 
   const [selected, setSelected] = useState(memberIndustries[1]);
 
-  //console.log(selected);
+  console.log(selectedList);
   const [selectedList, setSelectedList] = useState(countryList[0]);
 
   return (
