@@ -11,8 +11,11 @@ function index() {
   return (
     <div>
       {" "}
-      <Footer container>
-        <FooterLinkGroup>
+      <Footer
+        className="flex flex-col items-center justify-center rounded-none bg-[#210657] pb-4 text-white"
+        r
+      >
+        <FooterLinkGroup className="text-white">
           <FooterLink href="https://rie2025.com/privacy-policy-and-terms-conditions">
             Privacy Policy and T&C
           </FooterLink>
