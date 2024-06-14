@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
 import Whatsapp from "../../components/Whatsapp";
 import LazyLoad from "react-lazyload";
+import Footer from "../../components/Footer";
 
 function Index() {
   const navigate = useNavigate();
@@ -193,83 +194,86 @@ function Index() {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center bg-[#210657]">
-      <div className="w-full lg:w-1/3">
-        {formData.loading && <Loader />}
-        <div className="mb-7 flex justify-center">
-          <LazyLoad
-            height={200}
-            offset={100}
-            className="flex items-center justify-center"
-          >
-            <div className="flex size-full items-center justify-center">
-              <img src="/logo.svg" className="w-1/2" alt="Logo" />
-            </div>
-          </LazyLoad>
-        </div>
-        <div className="relative text-center">
-          <h2 className="text-3xl text-white">WELCOME TO</h2>
-          <h1 className="hue-animation bg-gradient-to-r from-[#f35626] to-[#feab3a] bg-clip-text text-center text-7xl font-black text-transparent">
-            RIE 2025
-          </h1>
-
-          <p className="absolute right-12 top-[80px] font-alexa text-5xl font-light text-white">
-            South Asia
-          </p>
-        </div>
-        <div className="z-0 p-4">
-          <form className="flex flex-col gap-4">
-            <div>
-              <div className="mb-2 block">
-                {/* <Label htmlFor="email1" value="Your email" /> */}
+    <>
+      <div className="flex h-screen flex-col items-center justify-center bg-[#210657]">
+        <div className="w-full lg:w-1/3">
+          {formData.loading && <Loader />}
+          <div className="mb-7 flex justify-center">
+            <LazyLoad
+              height={200}
+              offset={100}
+              className="flex items-center justify-center"
+            >
+              <div className="flex size-full items-center justify-center">
+                <img src="/logo.svg" className="w-1/2" alt="Logo" />
               </div>
-              <TextInput
-                id="email1"
-                type="text"
-                placeholder="name@example.com"
-                sizing="lg"
-                value={formData.email.toLowerCase()}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className={formData.alertMessage && "border-red-500"}
-              />
-            </div>
+            </LazyLoad>
+          </div>
+          <div className="relative text-center">
+            <h2 className="text-3xl text-white">WELCOME TO</h2>
+            <h1 className="hue-animation bg-gradient-to-r from-[#f35626] to-[#feab3a] bg-clip-text text-center text-7xl font-black text-transparent">
+              RIE 2025
+            </h1>
 
-            <Button type="submit" size="lg" onClick={handleSubmit}>
-              Member Login
-            </Button>
-          </form>
-        </div>
-        <div className="w-full lg:w-full">
-          <div className="w-full p-4">
-            {formData.alertMessage ? (
-              <Alert
-                color={formData.type}
-                icon={HiInformationCircle}
-                className="opacity-100 transition-opacity duration-1000"
-              >
-                <span className="font-medium">{formData.alertMessage}</span>
-              </Alert>
-            ) : error ? (
-              error
-            ) : (
-              <Alert
-                color="success"
-                icon={HiInformationCircle}
-                className="opacity-100 transition-opacity duration-1000"
-              >
-                <span className="font-medium">
-                  Use your EO Global registered email to receive an OTP for
-                  access.
-                </span>
-              </Alert>
-            )}
+            <p className="absolute right-12 top-[80px] font-alexa text-5xl font-light text-white">
+              South Asia
+            </p>
+          </div>
+          <div className="z-0 p-4">
+            <form className="flex flex-col gap-4">
+              <div>
+                <div className="mb-2 block">
+                  {/* <Label htmlFor="email1" value="Your email" /> */}
+                </div>
+                <TextInput
+                  id="email1"
+                  type="text"
+                  placeholder="name@example.com"
+                  sizing="lg"
+                  value={formData.email.toLowerCase()}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className={formData.alertMessage && "border-red-500"}
+                />
+              </div>
+
+              <Button type="submit" size="lg" onClick={handleSubmit}>
+                Member Login
+              </Button>
+            </form>
+          </div>
+          <div className="w-full lg:w-full">
+            <div className="w-full p-4">
+              {formData.alertMessage ? (
+                <Alert
+                  color={formData.type}
+                  icon={HiInformationCircle}
+                  className="opacity-100 transition-opacity duration-1000"
+                >
+                  <span className="font-medium">{formData.alertMessage}</span>
+                </Alert>
+              ) : error ? (
+                error
+              ) : (
+                <Alert
+                  color="success"
+                  icon={HiInformationCircle}
+                  className="opacity-100 transition-opacity duration-1000"
+                >
+                  <span className="font-medium">
+                    Use your EO Global registered email to receive an OTP for
+                    access.
+                  </span>
+                </Alert>
+              )}
+            </div>
           </div>
         </div>
+        <Whatsapp />
       </div>
-      <Whatsapp />
-    </div>
+      <Footer />
+    </>
   );
 }
 
