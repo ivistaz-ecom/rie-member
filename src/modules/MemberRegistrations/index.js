@@ -238,127 +238,97 @@ function Index() {
     // setBillingPostalCodeError("");
 
     let hasError = false;
+
     if (gender === "") {
       setGenderError("Gender is required.");
-      hasError = true;
+      if (!hasError) hasError = true;
       genderRef.current.focus();
     }
-    // if (searchCode.search === "") {
-    //   setCodeError("Country code is required.");
-    //   hasError = true;
-    //   //industryRef.current.focus();
-    //   setSearchCode({ showCodes: true });
-    // }
 
     if (phoneNumber === "") {
       setPhoneNumberError("Phone Number is required.");
-      hasError = true;
+      if (!hasError) hasError = true;
       phoneNumberRef.current.focus();
     } else if (phoneNumber.length < 10) {
       setPhoneNumberError("Phone Number must be at least 10 digits.");
-      hasError = true;
+      if (!hasError) hasError = true;
       phoneNumberRef.current.focus();
     } else {
       setPhoneNumberError("");
-      hasError = false;
     }
+
     if (companyName === "") {
       setCompanyNameError("Company Name is required.");
-      hasError = true;
+      if (!hasError) hasError = true;
       companyNameRef.current.focus();
     } else {
       setCompanyNameError("");
-      hasError = false;
     }
+
     if (selected === null) {
       setIndustryError("Industry is required.");
-      hasError = true;
-      // setIsexistsIndustry(false);
-      //industryRef.current.focus();
+      if (!hasError) hasError = true;
     } else {
       setIndustryError("");
-      hasError = false;
     }
 
     if (city === null) {
       setCityError("City is required.");
-      hasError = true;
-      // setIsexistsIndustry(false);
-      //industryRef.current.focus();
+      if (!hasError) hasError = true;
     } else {
       setCityError("");
-      hasError = false;
     }
+
     console.log(comCountry);
     if (comCountry === null) {
       setComCountryError("Country is required.");
-      hasError = true;
-      // setIsexistsIndustry(false);
-      //industryRef.current.focus();
+      if (!hasError) hasError = true;
     } else {
       setComCountryError("");
-      hasError = false;
     }
+
     if (comState === null) {
       setComStateError("State is required.");
-      hasError = true;
-      // setIsexistsIndustry(false);
-      //industryRef.current.focus();
+      if (!hasError) hasError = true;
     } else {
       setComStateError("");
-      hasError = false;
     }
 
     if (comCity === null) {
       setComCityError("City is required.");
-      hasError = true;
-      // setIsexistsIndustry(false);
-      //industryRef.current.focus();
+      if (!hasError) hasError = true;
     } else {
       setComCityError("");
-      hasError = false;
     }
-
-    //country.name
 
     if (communicationAddress.addressLine1 === "") {
       setCommunicationAddress1Error("Address Line 1 is required.");
-      hasError = true;
-      // setIsExistsAddr1(false);
+      if (!hasError) hasError = true;
       communication1Ref.current.focus();
     } else {
       setCommunicationAddress1Error("");
-      hasError = false;
     }
 
-    // if (communicationAddress.postalCode === "") {
-    //   setCommunicationPostalCodeError("Postal Code is required.");
-    //   hasError = true;
-    //   setIsexistsPostalCode(false);
-    //   communicationPostalCodeRef.current.focus();
-    // }
     if (billingAddress.addressLine1 === "") {
       setBillingAddress1Error("Address Line 1 is required.");
-      hasError = true;
+      if (!hasError) hasError = true;
       billing1Ref.current.focus();
     } else {
       setBillingAddress1Error("");
-      hasError = false;
     }
 
     if (country === null) {
       setCountryError("Country is required.");
-      hasError = true;
-      //billingPostalCodeRef.current.focus();
+      if (!hasError) hasError = true;
     } else {
       setCountryError("");
-      hasError = false;
     }
 
     if (hasError) {
       setLoader(false);
       return;
     }
+
     const currentLocations = {
       selectedCountry: country.name,
       selectedCountryIso: country.isoCode,
