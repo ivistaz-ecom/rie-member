@@ -326,6 +326,9 @@ function Index() {
       hasError = true;
       // setIsExistsAddr1(false);
       communication1Ref.current.focus();
+    } else {
+      setCommunicationAddress1Error("");
+      hasError = false;
     }
 
     // if (communicationAddress.postalCode === "") {
