@@ -707,6 +707,7 @@ function Index() {
             )}
           </div>
           <div>
+            <p className="-mb-4 text-start text-white">Select Industry</p>
             <Interest
               data={memberIndustries}
               selected={selected} // Pass the selected state variable here
