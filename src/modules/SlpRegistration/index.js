@@ -20,6 +20,9 @@ import Code from "../../components/AutoComplete/Code";
 
 function Index() {
   const navigate = useNavigate();
+
+  const [selected, setSelected] = useState(memberIndustries[1]);
+  const [selectedList, setSelectedList] = useState(countryList[0]);
   //const slpCount = sessionStorage.getItem("r_MemberCount");
   const memberSavedInfo = sessionStorage.getItem("r_TokenMember_Info");
   const parseMemSavedInfo = JSON.parse(memberSavedInfo);
@@ -121,6 +124,10 @@ function Index() {
   const [emailError, setEmailError] = useState("");
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
+  const [countryError, setCountryError] = useState("");
+  const [stateError, setStateError] = useState("");
+  const [cityError, setCityError] = useState("");
+  const [industryError, setIndustryError] = useState("");
 
   const [communicationAddress1Error, setCommunicationAddress1Error] =
     useState("");
@@ -302,14 +309,39 @@ function Index() {
     // } else {
     //   setCompanyNameError();
     // }
-    // if (searchIndustry.search === "") {
-    //   setIndustryError("Industry is required.");
-    //   hasError = true;
-    //   industryRef.current.focus();
-    // } else {
-    //   setIndustryError();
-    // }
-    console.log(gender);
+
+    if (selected === null) {
+      setIndustryError("Industry is required.");
+      hasError = true;
+      //industryRef.current.focus();
+    } else {
+      setIndustryError();
+    }
+
+    if (country === null) {
+      setCountryError("Country is required.");
+      hasError = true;
+      //industryRef.current.focus();
+    } else {
+      setCountryError();
+    }
+    if (state === null) {
+      setStateError("State is required.");
+      hasError = true;
+      //industryRef.current.focus();
+    } else {
+      setStateError();
+    }
+
+    if (city === null) {
+      setCityError("City is required.");
+      hasError = true;
+      //industryRef.current.focus();
+    } else {
+      setCityError();
+    }
+    console.log("industry" + selected);
+
     if (communicationAddress.addressLine1 === "") {
       setCommunicationAddress1Error("Address Line 1 is required.");
       hasError = true;
@@ -468,11 +500,6 @@ function Index() {
     }
   }, [copyAddress, stateData, cityData, countryData]);
 
-  const [selected, setSelected] = useState(memberIndustries[1]);
-
-  console.log(selectedList);
-  const [selectedList, setSelectedList] = useState(countryList[0]);
-
   return (
     <div className="flex flex-col items-center justify-center bg-[#210657]">
       <Stepper
@@ -484,6 +511,14 @@ function Index() {
           SLP Information
         </h2>
         <div className="flex flex-col gap-4">
+          <div className="-pt-12  grid grid-cols-2 gap-1 p-0">
+            <div className="w-full">
+              <p className="-mb-4 text-start text-white">First Name</p>
+            </div>
+            <div className="w-full">
+              <p className="-mb-4 text-start text-white">Last Name</p>
+            </div>
+          </div>
           <div className="grid  grid-cols-2 gap-2 ">
             <TextInput
               id="small"
@@ -511,16 +546,20 @@ function Index() {
           <div className="-pt-12  grid grid-cols-2 gap-1 p-0">
             <div className="w-full">
               {firstNameError && (
-                <p className="p-2 text-start text-red-500">{firstNameError}</p>
+                <p className="-mt-4 p-2 text-start text-red-500">
+                  {firstNameError}
+                </p>
               )}
             </div>
             <div className="w-full">
               {lastNameError && (
-                <p className=" p-2 text-start text-red-500">{lastNameError}</p>
+                <p className="-mt-4 p-2 text-start text-red-500">
+                  {lastNameError}
+                </p>
               )}
             </div>
           </div>
-
+          <p className="-mb-4 text-start text-white">Choose Gender</p>
           <div>
             <Select
               id="countries"
@@ -545,6 +584,8 @@ function Index() {
               <p className="p-2 text-start text-red-500">{genderError}</p>
             )}
           </div>
+
+          <p className="-mb-4 text-start text-white">Email Address *</p>
           <div>
             <TextInput
               id="small"
@@ -556,15 +597,19 @@ function Index() {
               color={emailError && "failure"}
               onChange={handleEmailAddressChange}
             />
-            {!isValidEmail && emailAddress !== "" && (
-              <div className="text-start text-red-500">
-                Invalid email address
-              </div>
-            )}
-            {emailError && (
+
+            {emailError ? (
               <p className="p-2 text-start text-red-500">{emailError}</p>
+            ) : (
+              !isValidEmail &&
+              emailAddress !== "" && (
+                <div className="text-start text-red-500">
+                  Invalid email address
+                </div>
+              )
             )}
           </div>
+          <p className="-mb-4 text-start text-white">Phone Number</p>
           <div className="relative flex gap-2">
             <Code
               countryList={countryList}
@@ -588,7 +633,9 @@ function Index() {
           <div>
             {" "}
             {phoneNumberError && (
-              <p className="p-2 text-start text-red-500">{phoneNumberError}</p>
+              <p className="-mt-4 p-2 text-start text-red-500">
+                {phoneNumberError}
+              </p>
             )}
           </div>
         </div>
@@ -614,6 +661,7 @@ function Index() {
           </div>
         )}
         <div className="flex flex-col gap-4">
+          <p className="-mb-4 text-start text-white">Address Line 1</p>
           <div>
             <TextInput
               id="small"
@@ -633,6 +681,7 @@ function Index() {
               </p>
             )}
           </div>
+          <p className="-mb-4 text-start text-white">Address Line 2</p>
           <div>
             <TextInput
               id="small"
@@ -653,33 +702,59 @@ function Index() {
           </div>
           <div>
             <div>
+              <p className="-mb-4 text-start text-white">Choose Country</p>
               <div>
                 <Autocomplete
                   data={countryData}
                   selected={country}
                   setSelected={setCountry}
+                  error={countryError}
                 />
+                {countryError && (
+                  <p className="-mt-6 p-2 text-start text-red-500">
+                    {countryError}
+                  </p>
+                )}
               </div>
               {stateData && stateData.length > 0 && (
-                <div>
-                  <Autocomplete
-                    data={stateData}
-                    selected={state}
-                    setSelected={setState}
-                  />
-                </div>
+                <>
+                  <p className="-mb-4 text-start text-white">Choose State</p>
+                  <div>
+                    <Autocomplete
+                      data={stateData}
+                      selected={state}
+                      setSelected={setState}
+                      error={stateError}
+                    />
+                    {stateError && (
+                      <p className="-mt-6 p-2 text-start text-red-500">
+                        {stateError}
+                      </p>
+                    )}
+                  </div>
+                </>
               )}
               {cityData && cityData.length > 0 && (
-                <div>
-                  <Autocomplete
-                    data={cityData}
-                    selected={city}
-                    setSelected={setCity}
-                  />
-                </div>
+                <>
+                  <p className="-mb-4 text-start text-white">Choose City</p>
+                  <div>
+                    <Autocomplete
+                      data={cityData}
+                      selected={city}
+                      setSelected={setCity}
+                      error={cityError}
+                    />
+                    {cityError && (
+                      <p className="-mt-6 p-2 text-start text-red-500">
+                        {cityError}
+                      </p>
+                    )}
+                  </div>
+                </>
               )}
             </div>
           </div>
+          <p className="-mb-4 text-start text-white">Postal Code</p>
           <div>
             <TextInput
               id="small"
@@ -722,6 +797,7 @@ function Index() {
           </div>
         )}
         <div className="flex flex-col gap-4">
+          <p className="-mb-4 text-start text-white">Company Name</p>
           <div>
             <TextInput
               id="small"
@@ -742,8 +818,13 @@ function Index() {
               data={memberIndustries}
               selected={selected} // Pass the selected state variable here
               setSelected={setSelected} // Pass the setSelected function
+              error={industryError}
             />
           </div>
+          {industryError && (
+            <p className="-mt-6 p-2 text-start text-red-500">{industryError}</p>
+          )}
+          <p className="-mb-4 text-start text-white">GST # if applicable</p>
           <div>
             <TextInput
               id="small"

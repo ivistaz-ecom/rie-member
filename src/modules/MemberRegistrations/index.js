@@ -51,44 +51,6 @@ function Index() {
   const [companyName, setCompanyName] = useState(
     parseMemSavedInfo ? parseMemSavedInfo.riemembers.company : "",
   );
-  const [searchIndustry, setSearchIndustry] = useState({
-    search: parseMemSavedInfo ? parseMemSavedInfo.riemembers.industry : "",
-    showLists: false,
-  });
-  const [searchCode, setSearchCode] = useState({
-    search: parserMemberContact ? parserMemberContact.code : "+91",
-    showCodes: false,
-  });
-  const [searchCountry, setSearchCountry] = useState({
-    search: "India",
-    showCountry: false,
-    country: parseMemSavedInfo ? parseMemSavedInfo.riemembers.country : "",
-  });
-  const [searchState, setSearchState] = useState({
-    search: "",
-    showState: false,
-    state: parseMemSavedInfo ? parseMemSavedInfo.riemembers.state : "",
-  });
-  const [searchCity, setSearchCity] = useState({
-    search: "",
-    showCity: false,
-    city: parseMemSavedInfo ? parseMemSavedInfo.riemembers.city : "",
-  });
-  const [searchBillCountry, setSearchBillCountry] = useState({
-    search: "",
-    showCountry: false,
-    country: parseMemSavedInfo ? parseMemSavedInfo.riemembers.comcountry : "",
-  });
-  const [searchBillState, setSearchBillState] = useState({
-    search: "",
-    showState: false,
-    state: parseMemSavedInfo ? parseMemSavedInfo.riemembers.comstate : "",
-  });
-  const [searchBillCity, setSearchBillCity] = useState({
-    search: "",
-    showCity: false,
-    city: parseMemSavedInfo ? parseMemSavedInfo.riemembers.comcity : "",
-  });
 
   // const filteredState = states.filter((state) =>
   //   state.name.toLowerCase().includes(searchState.toLowerCase()),
@@ -123,6 +85,12 @@ function Index() {
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [companyNameError, setCompanyNameError] = useState("");
   const [industryError, setIndustryError] = useState("");
+
+  //const [industryError, setIndustryError] = useState("");
+
+  const [countryError, setCountryError] = useState("");
+  const [stateError, setStateError] = useState("");
+  const [cityError, setCityError] = useState("");
   const [communicationAddress1Error, setCommunicationAddress1Error] =
     useState("");
   // const [communicationAddress2Error, setCommunicationAddress2Error] =
@@ -251,69 +219,6 @@ function Index() {
     }
   };
 
-  // const [filteredIndustries, setFilteredIndustries] = useState([]);
-  // const [isExistsIndustry, setIsexistsIndustry] = useState();
-  // const [isExistsAddr1, setIsExistsAddr1] = useState(true);
-
-  // useEffect(() => {
-  //   if (searchIndustry.search) {
-  //     const filteredIndustries = memberIndustries.filter((industry) =>
-  //       industry.type
-  //         .toLowerCase()
-  //         .includes(searchIndustry.search.toLowerCase()),
-  //     );
-  //     console.log(searchIndustry.search);
-
-  //     if (filteredIndustries.length === 0) {
-  //       setIndustryError("This is not a valid input.");
-  //       console.log("This is not a valid input.");
-  //       setIsexistsIndustry(false);
-  //       // setSearchIndustry({ showLists: true });
-  //     } else {
-  //       setIndustryError("");
-  //       console.log("This is a valid input.");
-  //       setIsexistsIndustry(true);
-  //     }
-
-  //     setFilteredIndustries(filteredIndustries);
-  //   } else {
-  //     setFilteredIndustries([]);
-  //     setIndustryError("");
-  //   }
-  // }, [searchIndustry.search, memberIndustries]);
-
-  // const [filteredCountryCodes, setFilteredCountryCodes] = useState([]);
-  // const [isExistsCountryCode, setIsexistsCountryCode] = useState(false);
-  // useEffect(() => {
-  //   if (searchCode.search) {
-  //     const filteredCountryCodes = countryList.filter((country) =>
-  //       country.name.toLowerCase().includes(searchCode.search.toLowerCase()),
-  //     );
-
-  //     if (filteredCountryCodes.length === 0) {
-  //       setCodeError("This is not a valid Country Code.");
-  //       console.log("This is not a valid input.");
-  //       setSearchCode({ showCodes: false });
-  //       setIsexistsCountryCode(true);
-  //       //setIsexistsIndustry(false);
-  //       // setSearchIndustry({ showLists: true });
-  //     } else {
-  //       setCodeError("");
-  //       console.log("This is a valid input.");
-  //       console.log(searchCode.search);
-  //       setSearchCode({ showCodes: true });
-  //       //setIsexistsIndustry(true);
-  //       setFilteredCountryCodes(filteredCountryCodes);
-  //       setIsexistsCountryCode(true);
-  //     }
-
-  //     setFilteredIndustries(filteredIndustries);
-  //   } else {
-  //     setFilteredIndustries([]);
-  //     setCodeError("");
-  //   }
-  // }, [searchCode.search, countryList]);
-
   const submitMemberData = async (e) => {
     e.preventDefault();
     setLoader(true);
@@ -354,12 +259,26 @@ function Index() {
       hasError = true;
       companyNameRef.current.focus();
     }
-    // if (searchIndustry.search === "") {
-    //   setIndustryError("Industry is required.");
-    //   hasError = true;
-    //   // setIsexistsIndustry(false);
-    //   //industryRef.current.focus();
-    // }
+    if (selected === null) {
+      setIndustryError("Industry is required.");
+      hasError = true;
+      // setIsexistsIndustry(false);
+      //industryRef.current.focus();
+    } else {
+      setIndustryError("");
+    }
+
+    if (city === null) {
+      setCityError("City is required.");
+      hasError = true;
+      // setIsexistsIndustry(false);
+      //industryRef.current.focus();
+    } else {
+      setCityError("");
+    }
+
+    //country.name
+
     if (communicationAddress.addressLine1 === "") {
       setCommunicationAddress1Error("Address Line 1 is required.");
       hasError = true;
@@ -367,12 +286,12 @@ function Index() {
       communication1Ref.current.focus();
     }
 
-    if (communicationAddress.postalCode === "") {
-      setCommunicationPostalCodeError("Postal Code is required.");
-      hasError = true;
-      setIsexistsPostalCode(false);
-      communicationPostalCodeRef.current.focus();
-    }
+    // if (communicationAddress.postalCode === "") {
+    //   setCommunicationPostalCodeError("Postal Code is required.");
+    //   hasError = true;
+    //   setIsexistsPostalCode(false);
+    //   communicationPostalCodeRef.current.focus();
+    // }
     if (billingAddress.addressLine1 === "") {
       setBillingAddress1Error("Address Line 1 is required.");
       hasError = true;
@@ -382,11 +301,11 @@ function Index() {
       hasError = false;
     }
 
-    if (billingAddress.postalCode === "") {
-      setBillingPostalCodeError("Postal Code is required.");
-      hasError = true;
-      billingPostalCodeRef.current.focus();
-    }
+    // if (billingAddress.postalCode === "") {
+    //   setBillingPostalCodeError("Postal Code is required.");
+    //   hasError = true;
+    //   billingPostalCodeRef.current.focus();
+    // }
 
     if (hasError) {
       setLoader(false);
@@ -642,6 +561,8 @@ function Index() {
   // Update sessionStorage when country changes
 
   const [selected, setSelected] = useState(memberIndustries[1]);
+
+  //console.log(selected);
   const [selectedList, setSelectedList] = useState(countryList[0]);
 
   return (
@@ -656,7 +577,7 @@ function Index() {
           Member Information
         </h2>
         <div className="flex flex-col gap-4">
-          <p className="-mb-4 text-start text-white">Select Gender</p>
+          <p className="-mb-4 text-start text-white">Choose Gender</p>
           <div>
             <Select
               id="countries"
@@ -740,30 +661,16 @@ function Index() {
             )}
           </div>
           <div>
-            <p className="-mb-4 text-start text-white">Select Industry</p>
+            <p className="-mb-4 text-start text-white">Choose Industry</p>
             <Interest
               data={memberIndustries}
               selected={selected} // Pass the selected state variable here
               setSelected={setSelected} // Pass the setSelected function
+              error={industryError}
             />
-
-            {/* {filteredIndustries.length > 0 && searchIndustry.showLists && (
-              <ListGroup className="w-full">
-                {filteredIndustries.slice(0, 7).map((item) => (
-                  <ListGroup.Item
-                    key={item.id}
-                    onClick={(e) =>
-                      setSearchIndustry({
-                        search: item.type,
-                        showLists: false,
-                      })
-                    }
-                  >
-                    {item.type}
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-            )} */}
+            {industryError && (
+              <p className="p-2 text-start text-red-500">{industryError}</p>
+            )}
           </div>
           <p className="-mb-4 text-start text-white">GST # if Applicable</p>
           <div>
@@ -830,36 +737,43 @@ function Index() {
             )} */}
           </div>
           <div>
-            <p className="-mb-4 text-start text-white">Country</p>
+            <p className="-mb-4 text-start text-white">Choose Country</p>
             <div>
               <Autocomplete
                 data={countryData}
                 selected={country}
                 setSelected={setCountry}
+                error={countryError}
               />
             </div>
             {stateData && stateData.length > 0 && (
               <>
-                <p className="-mb-4 text-start text-white">State</p>
+                <p className="-mb-4 text-start text-white">Choose State</p>
                 <div>
                   <Autocomplete
                     data={stateData}
                     selected={state}
                     setSelected={setState}
+                    error={stateError}
                   />
                 </div>
               </>
             )}
             {cityData && cityData.length > 0 && (
               <>
-                <p className="-mb-4 text-start text-white">City</p>
+                <p className="-mb-4 text-start text-white">Choose City</p>
                 <div>
                   <Autocomplete
                     data={cityData}
                     selected={city}
                     setSelected={setCity}
+                    error={cityError}
                   />
                 </div>
+
+                {cityError && (
+                  <p className="p-2 text-start text-red-500">{cityError}</p>
+                )}
               </>
             )}
           </div>
@@ -952,7 +866,7 @@ function Index() {
           </div>
           <div>
             {/* second part  */}
-            <p className="-mb-4 text-start text-white">Country</p>
+            <p className="-mb-4 text-start text-white">Choose Country</p>
             <div>
               <Autocomplete
                 data={countryComData}
@@ -962,7 +876,7 @@ function Index() {
             </div>
             {stateComData && stateComData.length > 0 && (
               <>
-                <p className="-mb-4 text-start text-white">State</p>
+                <p className="-mb-4 text-start text-white">Choose State</p>
                 <div>
                   <Autocomplete
                     data={stateComData}
@@ -974,7 +888,7 @@ function Index() {
             )}
             {cityComData && (
               <>
-                <p className="-mb-4 text-start text-white">City</p>
+                <p className="-mb-4 text-start text-white">Choose City</p>
                 <div>
                   <Autocomplete
                     data={cityComData}
