@@ -81,7 +81,32 @@ const PaymentGateway = () => {
   const status = "false";
   const id = parseMemberInfo[0].id;
   const totalMember = parseMemberData.memberCount;
-  const updateSpouseStatus = () => {};
+
+  const [voucherAmt, setVoucherAmt] = useState("0.00");
+
+  useEffect(() => {
+    // Retrieve voucher amount from session storage
+    const storedData = JSON.parse(
+      sessionStorage.getItem("r_TokenMember_Session"),
+    );
+    if (storedData) {
+      setVoucherAmt(storedData[0].voucher_amt); // Assuming only one object is stored
+    }
+  }, []);
+
+  const updateVoucherAmount = (newAmount) => {
+    setVoucherAmt(newAmount);
+    // Update voucher amount in session storage
+    sessionStorage.setItem(
+      "r_TokenMember_Session",
+      JSON.stringify([
+        {
+          ...JSON.parse(sessionStorage.getItem("r_TokenMember_Session"))[0],
+          voucher_amt: newAmount,
+        },
+      ]),
+    );
+  };
 
   const renderVoucher = () => (
     <>
@@ -207,7 +232,7 @@ const PaymentGateway = () => {
       </div>
       <button
         className="mb-2 me-2 mt-4 rounded-full bg-[#612ADB] px-8 py-2.5 text-sm text-white hover:bg-[#612ADB]"
-        onClick={updateSpouseStatus}
+        onClick={() => updateVoucherAmount("10.00")}
       >
         Memeber Voucher {parseMemberInfo[0].voucher_amt}
       </button>
