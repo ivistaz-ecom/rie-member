@@ -367,12 +367,12 @@ function Index() {
       communication1Ref.current.focus();
     }
 
-    // if (communicationAddress.postalCode === "") {
-    //   setCommunicationPostalCodeError("Postal Code is required.");
-    //   hasError = true;
-    //   setIsexistsPostalCode(false);
-    //   communicationPostalCodeRef.current.focus();
-    // }
+    if (communicationAddress.postalCode === "") {
+      setCommunicationPostalCodeError("Postal Code is required.");
+      hasError = true;
+      setIsexistsPostalCode(false);
+      communicationPostalCodeRef.current.focus();
+    }
     if (billingAddress.addressLine1 === "") {
       setBillingAddress1Error("Address Line 1 is required.");
       hasError = true;
@@ -382,11 +382,11 @@ function Index() {
       hasError = false;
     }
 
-    // if (billingAddress.postalCode === "") {
-    //   setBillingPostalCodeError("Postal Code is required.");
-    //   hasError = true;
-    //   billingPostalCodeRef.current.focus();
-    // }
+    if (billingAddress.postalCode === "") {
+      setBillingPostalCodeError("Postal Code is required.");
+      hasError = true;
+      billingPostalCodeRef.current.focus();
+    }
 
     if (hasError) {
       setLoader(false);
