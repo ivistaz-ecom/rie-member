@@ -592,7 +592,7 @@ function Index() {
             )}
           </div>
 
-          <p className="-mb-4 text-start text-white">Email Address *</p>
+          <p className="-mb-4 text-start text-white">Email Address</p>
           <div>
             <TextInput
               id="small"
