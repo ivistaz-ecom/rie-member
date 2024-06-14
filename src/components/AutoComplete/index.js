@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
-function Selector({ data, selected, setSelected, error }) {
+function Selector({ data, selected, setSelected, error, placeholder }) {
   //console.log("Sates" + selected);
 
   const [query, setQuery] = useState("");
@@ -24,6 +24,7 @@ function Selector({ data, selected, setSelected, error }) {
             className={`${error ? "border-2 border-red-500  bg-red-50" : "border-none  bg-white"} relative w-full cursor-default overflow-hidden rounded-lg bg-white py-3 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm`}
           >
             <Combobox.Input
+              placeholder={placeholder}
               className={`${error ? " bg-red-50" : " bg-white"} w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 outline-none focus:ring-0`}
               displayValue={(person) => (person ? person.name : "")}
               onChange={(event) => setQuery(event.target.value)}

@@ -81,6 +81,7 @@ const PaymentGateway = () => {
   const status = "false";
   const id = parseMemberInfo[0].id;
   const totalMember = parseMemberData.memberCount;
+  const updateSpouseStatus = () => {};
 
   const renderVoucher = () => (
     <>
@@ -204,13 +205,19 @@ const PaymentGateway = () => {
 
         <hr className="mt-3 w-full bg-indigo-700 bg-opacity-20" />
       </div>
-      {/* <button className='text-white bg-[#612ADB] hover:bg-[#612ADB] rounded-full text-sm px-8 py-2.5 me-2 mb-2 mt-4'
-            onClick={updateSpouseStatus}
-            >Memeber Status {parsedSessionData[0].spouse_status}</button>   */}
+      <button
+        className="mb-2 me-2 mt-4 rounded-full bg-[#612ADB] px-8 py-2.5 text-sm text-white hover:bg-[#612ADB]"
+        onClick={updateSpouseStatus}
+      >
+        Memeber Voucher {parseMemberInfo[0].voucher_amt}
+      </button>
       {/* <small>Only for developer use</small>
-       <button className='text-white bg-[#612ADB] hover:bg-[#612ADB] rounded-full text-sm px-8 py-2.5 me-2 mb-2 mt-4'
-            onClick={handleMember}
-            >Test Case (Member Voucher)</button>   */}
+      <button
+        className="mb-2 me-2 mt-4 rounded-full bg-[#612ADB] px-8 py-2.5 text-sm text-white hover:bg-[#612ADB]"
+        onClick={handleMember}
+      >
+        Test Case (Member Voucher)
+      </button> */}
       <h1 className="my-5 text-2xl font-bold text-[#3F3D56]">Payment Method</h1>
       {/* {state.memberPhone} */}
       <br />

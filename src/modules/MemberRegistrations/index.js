@@ -91,6 +91,11 @@ function Index() {
   const [countryError, setCountryError] = useState("");
   const [stateError, setStateError] = useState("");
   const [cityError, setCityError] = useState("");
+
+  const [comCountryError, setComCountryError] = useState("");
+  const [comStateError, setComStateError] = useState("");
+  const [comCityError, setComCityError] = useState("");
+
   const [communicationAddress1Error, setCommunicationAddress1Error] =
     useState("");
   // const [communicationAddress2Error, setCommunicationAddress2Error] =
@@ -276,6 +281,32 @@ function Index() {
     } else {
       setCityError("");
     }
+    console.log(comCountry);
+    if (comCountry === null) {
+      setComCountryError("Country is required.");
+      hasError = true;
+      // setIsexistsIndustry(false);
+      //industryRef.current.focus();
+    } else {
+      setComCountryError("");
+    }
+    if (comState === null) {
+      setComStateError("State is required.");
+      hasError = true;
+      // setIsexistsIndustry(false);
+      //industryRef.current.focus();
+    } else {
+      setComStateError("");
+    }
+
+    if (comCity === null) {
+      setComCityError("City is required.");
+      hasError = true;
+      // setIsexistsIndustry(false);
+      //industryRef.current.focus();
+    } else {
+      setComCityError("");
+    }
 
     //country.name
 
@@ -301,11 +332,13 @@ function Index() {
       hasError = false;
     }
 
-    // if (billingAddress.postalCode === "") {
-    //   setBillingPostalCodeError("Postal Code is required.");
-    //   hasError = true;
-    //   billingPostalCodeRef.current.focus();
-    // }
+    if (country === null) {
+      setCountryError("Country is required.");
+      hasError = true;
+      //billingPostalCodeRef.current.focus();
+    } else {
+      setCountryError("");
+    }
 
     if (hasError) {
       setLoader(false);
@@ -667,6 +700,7 @@ function Index() {
               selected={selected} // Pass the selected state variable here
               setSelected={setSelected} // Pass the setSelected function
               error={industryError}
+              placeholder="Choose Industry"
             />
             {industryError && (
               <p className="p-2 text-start text-red-500">{industryError}</p>
@@ -744,8 +778,14 @@ function Index() {
                 selected={country}
                 setSelected={setCountry}
                 error={countryError}
+                placeholder="Choose Country"
               />
             </div>
+            {countryError && (
+              <p className="-mt-4 p-2 text-start text-red-500">
+                {countryError}
+              </p>
+            )}
             {stateData && stateData.length > 0 && (
               <>
                 <p className="-mb-4 text-start text-white">Choose State</p>
@@ -755,8 +795,14 @@ function Index() {
                     selected={state}
                     setSelected={setState}
                     error={stateError}
+                    placeholder="Choose State"
                   />
                 </div>
+                {stateError && (
+                  <p className="-mt-4 p-2 text-start text-red-500">
+                    {stateError}
+                  </p>
+                )}
               </>
             )}
             {cityData && cityData.length > 0 && (
@@ -768,6 +814,7 @@ function Index() {
                     selected={city}
                     setSelected={setCity}
                     error={cityError}
+                    placeholder="Choose City"
                   />
                 </div>
 
@@ -872,7 +919,15 @@ function Index() {
                 data={countryComData}
                 selected={comCountry}
                 setSelected={setComCountry}
+                placeholder="Choose Country"
+                error={comCountryError}
               />
+
+              {comCountryError && (
+                <p className="-mt-4 p-2 text-start text-red-500">
+                  {comCountryError}
+                </p>
+              )}
             </div>
             {stateComData && stateComData.length > 0 && (
               <>
@@ -882,8 +937,16 @@ function Index() {
                     data={stateComData}
                     selected={comState}
                     setSelected={setComState}
+                    placeholder="Choose State"
+                    error={comStateError}
                   />
                 </div>
+
+                {comStateError && (
+                  <p className="-mt-4 p-2 text-start text-red-500">
+                    {comStateError}
+                  </p>
+                )}
               </>
             )}
             {cityComData && (
@@ -894,8 +957,15 @@ function Index() {
                     data={cityComData}
                     selected={comCity}
                     setSelected={setComCity}
+                    placeholder="Choose City"
+                    error={comCityError}
                   />
                 </div>
+                {comCityError && (
+                  <p className="-mt-4 p-2 text-start text-red-500">
+                    {comCityError}
+                  </p>
+                )}
               </>
             )}
           </div>

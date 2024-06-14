@@ -10,7 +10,13 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { Fragment, useState } from "react";
 
-export default function Example({ data, selected, setSelected, error }) {
+export default function Example({
+  data,
+  selected,
+  setSelected,
+  error,
+  placeholder,
+}) {
   const [query, setQuery] = useState("");
 
   const filteredPeople =
@@ -28,6 +34,7 @@ export default function Example({ data, selected, setSelected, error }) {
             className={`${error ? "border-2 border-red-500  bg-red-50" : "border-none  bg-white"} relative w-full cursor-default overflow-hidden rounded-lg  py-3 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm`}
           >
             <Combobox.Input
+              placeholder={placeholder}
               className={`${error ? " bg-red-50" : " bg-white"} w-full border-none py-2 pl-2 pr-10 text-sm leading-5 text-gray-900 outline-none focus:ring-0`}
               displayValue={(person) => (person ? person.type : "")}
               onChange={(event) => setQuery(event.target.value)}
