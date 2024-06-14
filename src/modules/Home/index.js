@@ -197,8 +197,14 @@ function Index() {
       <div className="w-full lg:w-1/3">
         {formData.loading && <Loader />}
         <div className="mb-7 flex justify-center">
-          <LazyLoad height={200} offset={100}>
-            <img src="/logo.svg" className="w-1/2" alt="Logo" />
+          <LazyLoad
+            height={200}
+            offset={100}
+            className="flex items-center justify-center"
+          >
+            <div className="flex size-full items-center justify-center">
+              <img src="/logo.svg" className="w-1/2" alt="Logo" />
+            </div>
           </LazyLoad>
         </div>
         <div className="relative text-center">
