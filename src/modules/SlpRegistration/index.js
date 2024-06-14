@@ -459,9 +459,11 @@ function Index() {
       if (city) {
         setCity(city);
       } else {
-        setCity(
-          JSON.parse(sessionStorage.getItem("billingCity")) || cityData[0],
-        );
+        if (cityData) {
+          setCity(
+            JSON.parse(sessionStorage.getItem("billingCity")) || cityData[0],
+          );
+        }
       }
     }
   }, [copyAddress, stateData, cityData, countryData]);
