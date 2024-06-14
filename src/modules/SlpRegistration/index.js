@@ -269,6 +269,7 @@ function Index() {
       genderRef.current.focus();
     } else {
       setGenderError();
+      hasError = false;
     }
 
     if (firstName === undefined) {
@@ -276,7 +277,8 @@ function Index() {
       hasError = true;
       firstNameRef.current.focus();
     } else {
-      setFirstNameError();
+      setFirstNameError("");
+      hasError = false;
     }
     if (lastName === undefined) {
       setLastNameError("LastName is required.");
@@ -284,6 +286,7 @@ function Index() {
       lastNameRef.current.focus();
     } else {
       setLastNameError();
+      hasError = false;
     }
     if (emailAddress === undefined) {
       setEmailError("Email is required.");
@@ -291,6 +294,7 @@ function Index() {
       emailRef.current.focus();
     } else {
       setEmailError();
+      hasError = false;
     }
     if (phoneNumber === undefined) {
       setPhoneNumberError("Phone Number is required.");
@@ -300,6 +304,9 @@ function Index() {
       setPhoneNumberError("Phone Number must be at least 10 digits.");
       hasError = true;
       phoneNumberRef.current.focus();
+    } else {
+      setPhoneNumberError("");
+      hasError = false;
     }
 
     // if (companyName === "") {
