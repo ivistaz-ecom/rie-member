@@ -82,9 +82,9 @@ function Index() {
                   )}
                 />
               </div>
-              <div className="mx-auto flex w-4/5 place-content-center justify-between">
+              <div className="mx-auto flex w-full justify-between lg:w-[65%]">
                 <OtpTimer />
-                <Button type="submit" size="lg" onClick={verifyOtp}>
+                <Button type="submit" size="sm" onClick={verifyOtp}>
                   Verify OTP
                 </Button>
               </div>

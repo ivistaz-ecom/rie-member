@@ -232,18 +232,31 @@ function Index() {
             </Button>
           </form>
         </div>
-        <div className="w-[430px] p-4">
-          {formData.alertMessage ? (
-            <Alert
-              color={formData.type}
-              icon={HiInformationCircle}
-              className="opacity-100 transition-opacity duration-1000"
-            >
-              <span className="font-medium">{formData.alertMessage}</span>
-            </Alert>
-          ) : (
-            error && error
-          )}
+        <div className="w-full lg:w-full">
+          <div className="w-full p-4">
+            {formData.alertMessage ? (
+              <Alert
+                color={formData.type}
+                icon={HiInformationCircle}
+                className="opacity-100 transition-opacity duration-1000"
+              >
+                <span className="font-medium">{formData.alertMessage}</span>
+              </Alert>
+            ) : error ? (
+              error
+            ) : (
+              <Alert
+                color="success"
+                icon={HiInformationCircle}
+                className="opacity-100 transition-opacity duration-1000"
+              >
+                <span className="font-medium">
+                  Use your EO Global registered email to receive an OTP for
+                  access.
+                </span>
+              </Alert>
+            )}
+          </div>
         </div>
       </div>
       <Whatsapp />

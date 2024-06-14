@@ -72,12 +72,12 @@ function Timer() {
   return (
     <div>
       {timerFinished ? (
-        <Button type="submit" size="lg" onClick={resetTimer}>
+        <Button type="submit" size="sm" onClick={resetTimer}>
           Resend OTP
         </Button>
       ) : (
-        <Button size="lg" className="" disabled={true}>
-          Resend OTP {seconds} sec
+        <Button size="sm" className="" disabled={true}>
+          Resend {seconds} sec
         </Button>
       )}
     </div>

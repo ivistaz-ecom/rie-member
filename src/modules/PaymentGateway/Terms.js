@@ -58,7 +58,8 @@ function Terms({ handleTermAccepted }) {
           <div className="relative rounded-lg bg-white shadow dark:bg-gray-700">
             <div className="flex items-center justify-between rounded-t border-b p-4 dark:border-gray-600 md:p-5">
               <h3 className="text-1xl font-semibold text-gray-900 dark:text-white">
-                RELEASE AND WAIVER OF LIABILITY AND INDEMNITY AGREEMENT
+                RELEASE AND WAIVER OF LIABILITY AND INDEMNITY AGREEMENT (please
+                scroll to the bottom to accept)
               </h3>
             </div>
 
