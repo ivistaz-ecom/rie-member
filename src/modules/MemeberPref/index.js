@@ -508,7 +508,7 @@ function Index() {
               htmlFor="interest"
               className="text-1xl  text-start text-white"
             >
-              Interests (Select Maximum 5 Number)
+              Interests (Please select a maximum of 5)
             </label>
             <TextInput
               id="small"
