@@ -417,8 +417,6 @@ function Index() {
 
   const countryData = Country.getAllCountries();
   const countryComData = Country.getAllCountries();
-  // console.log(curCountry);
-  // console.log(countryData[100]);
 
   const [stateData, setStateData] = useState();
   const [cityData, setCityData] = useState();
@@ -448,23 +446,6 @@ function Index() {
       );
     }
   }, [comState]);
-
-  // useEffect(() => {
-  //   if (stateData) {
-  //     if (state) {
-  //       setState(stateData[0]);
-  //     } else {
-  //       setState(JSON.parse(sessionStorage.getItem("billingState")));
-  //     }
-  //   }
-  // }, [stateData]);
-
-  // useEffect(() => {
-  //   if (cityData) {
-  //     setCity(JSON.parse(sessionStorage.getItem("billingCity")) || cityData[0]);
-  //   }
-  // }, [cityData]);
-
   useEffect(() => {
     setStateData(State.getStatesOfCountry(country ? country.isoCode : ""));
     if (state) {
@@ -537,21 +518,6 @@ function Index() {
           setCity(JSON.parse(sessionStorage.getItem("billingCity")));
         }
       }
-      // if (
-      //   JSON.parse(sessionStorage.getItem("billingCountry")) ||
-      //   JSON.parse(sessionStorage.getItem("billingState")) ||
-      //   JSON.parse(sessionStorage.getItem("billingCity"))
-      // ) {
-      //   if (comCountry || comState || comCity) {
-      //     setComCountry(comCountry);
-      //     setComState(comState);
-      //     setComCity(comCity);
-      //   } else {
-      //     setComCountry(JSON.parse(sessionStorage.getItem("commCountry")));
-      //     setComState(JSON.parse(sessionStorage.getItem("commState")));
-      //     setComCity(JSON.parse(sessionStorage.getItem("commCity")));
-      //   }
-      // }
     }
   }, [
     copyAddress,

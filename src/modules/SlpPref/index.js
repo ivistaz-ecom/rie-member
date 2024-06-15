@@ -489,13 +489,13 @@ function Index() {
               htmlFor="interest"
               className="text-1xl  text-start text-white"
             >
-              Interests (Select Multiple)
+              Interests (Select Maximum 5 Number)
             </label>
             <TextInput
               id="small"
               type="text"
               sizing="lg"
-              placeholder="Search Interest"
+              placeholder="Choose Selections"
               color={errors.interests && "failure"}
               ref={interestsRef}
               value={interestValue.search}
